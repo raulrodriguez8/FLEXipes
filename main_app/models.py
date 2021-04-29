@@ -5,7 +5,12 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-
+MEALS = (
+    ('B', 'Breakfast'),
+    ('R', 'Brunch'),
+    ('L', 'Lunch'),
+    ('D', 'Dinner')
+)
 
 class Meal(models.Model):
     date = models.DateField('feeding date')
