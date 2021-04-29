@@ -2,11 +2,17 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+import requests
 
 # Create your views here.
 
 def home(request):
-  return render(request, 'home.html')
+    response = requests.get("https://api.spoonacular.com/recipes/findByIngredients?ingredients=pasta&number=2&apiKey=2b13a7c2199445e08d4a4ff0b3f3cf99")
+    spoondata = response.json()
+    print(spoondata[0]['title'])
+    return render(request, 'home.html', {
+        'title': spoondata[0]['title']
+    })
 
 def signup(request):
     error_message = ''
