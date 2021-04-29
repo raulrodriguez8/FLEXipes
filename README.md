@@ -22,6 +22,9 @@ You can SAVE recipes from your results to try them out. If you like them you can
 It’s as Easy as that!
 
 -**F**ast
+
 -**L**azy
+
 -**E**asy
+
 -**X**perience
