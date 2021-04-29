@@ -14,3 +14,14 @@ Any recipes that you want to make, you can add to your “To Make List”.
 
 You can also save your favorite recipes to return to later! Dinner will never be a hassle again! 
 
+## What is FLEXipes?
+FLEXipes is a web application that lets you input the ingredients you have in your fridge and hunt for recipes to try based on your list.
+
+You can SAVE recipes from your results to try them out. If you like them you can add them to your Favorites list!
+
+It’s as Easy as that!
+
+Fast
+Lazy
+Easy
+Xperience
