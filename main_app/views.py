@@ -3,16 +3,12 @@ from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 import requests
+from .models import Ingredient
 
 # Create your views here.
 
 def home(request):
-    response = requests.get("https://api.spoonacular.com/recipes/findByIngredients?ingredients=pasta&number=2&apiKey=2b13a7c2199445e08d4a4ff0b3f3cf99")
-    spoondata = response.json()
-    print(spoondata[0]['title'])
-    return render(request, 'home.html', {
-        'title': spoondata[0]['title']
-    })
+    return render(request, 'home.html')
 
 def signup(request):
     error_message = ''
@@ -32,3 +28,17 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+def recipe_results(request):
+    # api_key = 2b13a7c2199445e08d4a4ff0b3f3cf99
+    api_ingredients = Ingredient.objects.all()
+    print(api_ingredients)
+    test_string = api_ingredients.all().values_list('name')
+    print(str(test_string))
+
+    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=%s&number=10&apiKey=2b13a7c2199445e08d4a4ff0b3f3cf99' % api_ingredients
+    
+    response = requests.get(url)
+    spoondata = response.json()
+    print(spoondata)
+    return render(request, 'home.html')
