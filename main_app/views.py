@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 import requests
+import json
 from .models import Ingredient
 
 # Create your views here.
@@ -29,6 +32,7 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
+@login_required
 def recipe_results(request):
     # api_key = 2b13a7c2199445e08d4a4ff0b3f3cf99
     api_ingredients = Ingredient.objects.all()
@@ -38,7 +42,8 @@ def recipe_results(request):
 
     url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=%s&number=10&apiKey=2b13a7c2199445e08d4a4ff0b3f3cf99' % api_ingredients
     
-    response = requests.get(url)
-    spoondata = response.json()
-    print(spoondata)
-    return render(request, 'home.html')
+    res = requests.get(url)
+    data = json.loads(res.text)
+   # data = json.dumps(data)
+    context = {'data': data}
+    return render(request, 'results.html', context)

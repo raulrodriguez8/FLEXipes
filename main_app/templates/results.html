@@ -2,10 +2,16 @@
 {% block content %}
 
 <h1>FLEXipes Home - Recipe Results</h1>
-<ul>
-    
-    <li>{{title}}</li>
 
-</ul>
+{% for recipe in data %}
+  <div class="card teal-text text-accent-4">
+    <a href="" style="text-decoration: none; color:inherit;">
+    <div class="card-content">
+      <span class="card-title">{{ recipe.title }}</span>
+      <img src="{{ recipe.image }}">
+    </div>
+    </a>
+  </div>
+{% endfor %}
 
 {% endblock %}
