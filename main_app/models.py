@@ -1,27 +1,31 @@
 from django.db import models
-
-# Import the User
 from django.contrib.auth.models import User
 
-UNITS = (
-    ('gm', 'Grams'),
-    ('cups', 'Cups'),
-    ('items', 'Each'),
-    ('oz', 'Ounces'),
-    ('Tbsp', 'Tablespoons'),
-    ('tsp', 'Teaspoons'),
-    ('lbs', 'Pounds'),
-    ('gallons', 'Gallon'),
-    ('ml', 'Milliliters'),
-    ('pint', 'Pint'),
+
+AISLE = (
+    ('Spices and Seasonings', 'Spices and Seasonings'),
+    ('Pasta and Rice', 'Pasta and Rice'),
+    ('Bakery/Bread', 'Bakery/Bread'),
+    ('Produce', 'Produce'),
+    ('Seafood', 'Seafood'),
+    ('Cheese', 'Cheese'),
+    ('Dried Fruits', 'Dried Fruits'), 
+    ('Nut butters, Jams, and Honey', 'Nut butters, Jams, and Honey'),
+    ('Oil, Vinegar, Salad Dressing', 'Oil, Vinegar, Salad Dressing'),
+    ('Condiments', 'Condiments'),
+    ('Milk, Eggs, Other Dairy', 'Milk, Eggs, Other Dairy'),
+    ('Ethnic Foods', 'Ethnic Foods'),
+    ('Tea and Coffee', 'Tea and Coffee'),
+    ('Refrigerated', 'Refrigerated'),
+    ('Canned and Jarred', 'Canned and Jarred'),
+    ('Frozen', 'Frozen'),
+    ('Alcoholic Beverages', 'Alcoholic Beverages'),
 )
 
 # Create your models here.
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
-    amount = models.FloatField()
-    unit = models.CharField(max_length=7, choices=UNITS, default=UNITS[0][0])
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    aisle = models.CharField(max_length=50, choices=AISLE, default=AISLE[0][0])
 
     def __str__(self):
         return f"{self.name}: {self.amount}{self.unit}"
@@ -45,3 +49,7 @@ class Meal(models.Model):
     # Add this method
     def get_absolute_url(self):
         return reverse('detail', kwargs={'user_id': self.id})
+
+class Foodie(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    pantry = models.ManyToManyField(Ingredient)

@@ -4,6 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 import requests
 from .models import Ingredient
+from .models import User
 
 # Create your views here.
 
@@ -42,3 +43,14 @@ def recipe_results(request):
     spoondata = response.json()
     print(spoondata)
     return render(request, 'home.html')
+
+def all_ingredients(request):
+    my_ingredients = User.objects.get(id=request.user.id).foodie.pantry
+    print(my_ingredients)
+    all_ingredients = Ingredient.objects.exclude(id__in=my_ingredients.values_list('id'))
+    print(all_ingredients)
+    context = {
+        'all_ingredients': all_ingredients,
+        'my_ingredients': my_ingredients
+        }
+    return render(request, 'ingredients/index.html', context)
