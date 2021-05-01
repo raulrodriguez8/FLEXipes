@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>FLEXipes- Recipe Details</h1>
+    <img src="{{data.image}}">
+    <h1>{{ data.title}}</h1>
+    <p>Ready in {{ data.readyInMinutes}} minutes</p>
+    <p>Servings: {{ data.servings }}</p>
+    {{ data.summary }}
+    <p>{{ data.instructions }}</p>
+    <a href="{{ data.spoonacularSourceUrl}}" target="_blank">Link to full recipe</a>
+
+{% endblock %}
