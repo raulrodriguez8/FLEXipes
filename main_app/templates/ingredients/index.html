@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>What is in your pantry right now?</h1>
+<div class="row">
+    <form action="{% url 'ingredient_create' %}" method="post" class="col s4">
+        {% csrf_token %}
+        {{ ingredient_form.as_p }}
+        <input type="submit" class="btn" value="Add Ingredient">
+    </form>
+</div>
+<div class="row">
+<ul class='collection col s6'>
+    <li class='collection-item teal lighten-3'>
+    
+    <div name='collection_contents'>
+        <h5 class='title'>All Ingredients</h5>
+    </div>
+        
+    </li>
+    {% for ingredient in ingredients %}
+    <li class='collection-item hoverable'>
+        <div class="collection_content">
+        <a href="#!"><i class="material-icons small circle teal lighten-4">add</i></a>
+        <h5 class='title' style="display: inline;">{{ ingredient.name }}</h5>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+<ul class='collection col s6'>
+    <li class='collection-item teal lighten-3'>
+    
+        <div name='collection_contents'>
+            <h5 class='title'>My Pantry</h5>
+        </div>
+        
+    </li>
+    {% for ingredient in user.profile.pantry.all %}
+    <li class='collection-item hoverable'>
+        <div class="collection_content">
+        <a href="#!"><i class="material-icons small circle teal lighten-4">remove</i></a>
+        <h5 class='title' style="display: inline;">{{ ingredient.name }}</h5>
+        </div>
+    </li>
+    {% empty %}
+    <li class='collection-item'>
+        <div name='collection_contents'>
+            <h5 class='title'>No Items</h5>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+</div>
+
+<script>
+  var selectEl = document.getElementById('id_aisle');
+  M.FormSelect.init(selectEl);
+</script>
+{% endblock %}

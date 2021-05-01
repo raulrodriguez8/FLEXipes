@@ -4,9 +4,14 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 import requests
 import json
 from .models import Ingredient
+from .models import User
+from .forms import IngredientForm
 
 # Create your views here.
 
@@ -47,6 +52,7 @@ def recipe_results(request):
     context = {'data': data}
     return render(request, 'recipes/results.html', context)
 
+
 def recipe_details(request, recipe_id):
     print(recipe_id)
     url = 'https://api.spoonacular.com/recipes/%s/information?includeNutrition=false&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % recipe_id
@@ -59,3 +65,34 @@ def recipe_details(request, recipe_id):
         }
 
     return render(request, 'recipes/details.html', context)
+
+def all_ingredients(request):
+    user_ingredients = User.objects.get(id=request.user.id).profile.pantry.all()
+    # print(my_ingredients)
+    # print(request.user.profile.pantry.all())
+    all_ingredients_not_in_user_pantry = Ingredient.objects.exclude(id__in=user_ingredients.values_list('id'))
+    print(all_ingredients_not_in_user_pantry)
+    ingredient_form = IngredientForm()
+    context = {
+        'ingredients': all_ingredients_not_in_user_pantry,
+        'ingredient_form': ingredient_form
+        }
+    return render(request, 'ingredients/index.html', context)
+
+@login_required
+def add_ingredient(request):
+    form = IngredientForm(request.POST)
+    if form.is_valid():
+        new_ingredient = form.save(commit=False)
+        new_ingredient.save()
+    return redirect('all_ingredients')
+
+class Ingredient_Update(LoginRequiredMixin, UpdateView):
+    model = Ingredient
+    fields = ['aisle']
+
+class Ingredient_Delete(LoginRequiredMixin, DeleteView):
+    model = Ingredient
+    success_url = '/ingredients/'
+
+
