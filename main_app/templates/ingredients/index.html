@@ -2,7 +2,7 @@
 {% block content %}
 
 <h1>What is in your pantry right now?</h1>
-<!-- 
+ 
 <div class="row">
 <ul class='collection col s6'>
     <li class='collection-item teal lighten-3'>
@@ -12,7 +12,7 @@
     </div>
         
     </li>
-    {% for ingredient in all_ingredients %}
+    {% for ingredient in ingredients %}
     <li class='collection-item hoverable'>
         <div class="collection_content">
         <a href="#!"><i class="material-icons small circle teal lighten-4">add</i></a>
@@ -28,7 +28,7 @@
             <h5 class='title'>My Pantry</h5>
         </div>
         
-    </li>
+    <!-- </li>
     {% for ingredient in my_ingredients %}
     <li class='collection-item hoverable'>
         <div class="collection_content">
@@ -36,7 +36,7 @@
         <h5 class='title' style="display: inline;">{{ ingredient.name }}</h5>
         </div>
     </li>
-    {% endfor %}
+    {% endfor %} -->
 </ul>
-</div> -->
+</div>
 {% endblock %}
