@@ -42,3 +42,6 @@ def recipe_results(request):
     spoondata = response.json()
     print(spoondata)
     return render(request, 'home.html')
+
+def ingredients(request):
+    return render(request, 'ingredients/index.html')
