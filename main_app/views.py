@@ -4,9 +4,11 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 import requests
 from .models import Ingredient
 from .models import User
+from .forms import IngredientForm
 
 # Create your views here.
 
@@ -52,14 +54,20 @@ def all_ingredients(request):
     # print(request.user.profile.pantry.all())
     all_ingredients_not_in_user_pantry = Ingredient.objects.exclude(id__in=user_ingredients.values_list('id'))
     print(all_ingredients_not_in_user_pantry)
+    ingredient_form = IngredientForm()
     context = {
         'ingredients': all_ingredients_not_in_user_pantry,
+        'ingredient_form': ingredient_form
         }
     return render(request, 'ingredients/index.html', context)
 
-class Ingredient_Create(LoginRequiredMixin, CreateView):
-  model = Ingredient
-  fields = ['name', 'aisle']
+@login_required
+def add_ingredient(request):
+    form = IngredientForm(request.POST)
+    if form.is_valid():
+        new_ingredient = form.save(commit=False)
+        new_ingredient.save()
+    return redirect('all_ingredients')
 
 class Ingredient_Update(LoginRequiredMixin, UpdateView):
     model = Ingredient
