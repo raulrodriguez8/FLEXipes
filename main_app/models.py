@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 AISLE = (
     ('Spices and Seasonings', 'Spices and Seasonings'),
     ('Pasta and Rice', 'Pasta and Rice'),
@@ -22,6 +21,13 @@ AISLE = (
     ('Alcoholic Beverages', 'Alcoholic Beverages'),
 )
 
+MEALS = (
+    ('B', 'Breakfast'),
+    ('R', 'Brunch'),
+    ('L', 'Lunch'),
+    ('D', 'Dinner')
+)
+
 # Create your models here.
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
@@ -30,12 +36,6 @@ class Ingredient(models.Model):
     def __str__(self):
         return f"{self.name}: {self.amount}{self.unit}"
 
-MEALS = (
-    ('B', 'Breakfast'),
-    ('R', 'Brunch'),
-    ('L', 'Lunch'),
-    ('D', 'Dinner')
-)
 
 class Meal(models.Model):
     date = models.DateField('feeding date')
