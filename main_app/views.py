@@ -34,16 +34,28 @@ def signup(request):
 
 @login_required
 def recipe_results(request):
-    # api_key = 2b13a7c2199445e08d4a4ff0b3f3cf99
+    # api_key = 7276efa6287b40cc9b9703a7ed323fb3
     api_ingredients = Ingredient.objects.all()
     print(api_ingredients)
     test_string = api_ingredients.all().values_list('name')
     print(str(test_string))
 
-    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=%s&number=10&apiKey=2b13a7c2199445e08d4a4ff0b3f3cf99' % api_ingredients
+    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=%s&number=10&ranking=1&ignorePantry=true&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % api_ingredients
     
     res = requests.get(url)
     data = json.loads(res.text)
-   # data = json.dumps(data)
     context = {'data': data}
-    return render(request, 'results.html', context)
+    return render(request, 'recipes/results.html', context)
+
+def recipe_details(request, recipe_id):
+    print(recipe_id)
+    url = 'https://api.spoonacular.com/recipes/%s/information?includeNutrition=false&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % recipe_id
+
+    res = requests.get(url)
+    data = json.loads(res.text)
+    print(data)
+    context = {
+        'data': data,
+        }
+
+    return render(request, 'recipes/details.html', context)

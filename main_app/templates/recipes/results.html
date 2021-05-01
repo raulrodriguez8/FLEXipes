@@ -5,7 +5,7 @@
 
 {% for recipe in data %}
   <div class="card teal-text text-accent-4">
-    <a href="" style="text-decoration: none; color:inherit;">
+    <a href="{% url 'recipe_details' recipe.id %}">
     <div class="card-content">
       <span class="card-title">{{ recipe.title }}</span>
       <img src="{{ recipe.image }}">
