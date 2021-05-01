@@ -28,15 +28,21 @@
             <h5 class='title'>My Pantry</h5>
         </div>
         
-    <!-- </li>
-    {% for ingredient in my_ingredients %}
+    </li>
+    {% for ingredient in user.profile.pantry.all %}
     <li class='collection-item hoverable'>
         <div class="collection_content">
         <a href="#!"><i class="material-icons small circle teal lighten-4">remove</i></a>
         <h5 class='title' style="display: inline;">{{ ingredient.name }}</h5>
         </div>
     </li>
-    {% endfor %} -->
+    {% empty %}
+    <li class='collection-item'>
+        <div name='collection_contents'>
+            <h5 class='title'>No Items</h5>
+        </div>
+    </li>
+    {% endfor %}
 </ul>
 </div>
 {% endblock %}

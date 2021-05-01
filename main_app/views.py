@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 import requests
 from .models import Ingredient
 from .models import User
@@ -45,12 +47,24 @@ def recipe_results(request):
     return render(request, 'home.html')
 
 def all_ingredients(request):
-    my_ingredients = User.objects.get(id=request.user.id).profile.pantry.all()
-    print(my_ingredients)
-    all_ingredients = Ingredient.objects.exclude(id__in=my_ingredients.values_list('id'))
-    print(all_ingredients)
+    user_ingredients = User.objects.get(id=request.user.id).profile.pantry.all()
+    # print(my_ingredients)
+    # print(request.user.profile.pantry.all())
+    all_ingredients_not_in_user_pantry = Ingredient.objects.exclude(id__in=user_ingredients.values_list('id'))
+    print(all_ingredients_not_in_user_pantry)
     context = {
-        'ingredients': all_ingredients,
-        'my_ingredients': my_ingredients
+        'ingredients': all_ingredients_not_in_user_pantry,
         }
     return render(request, 'ingredients/index.html', context)
+
+class Ingredient_Create(LoginRequiredMixin, CreateView):
+  model = Ingredient
+  fields = ['name', 'aisle']
+
+class Ingredient_Update(LoginRequiredMixin, UpdateView):
+    model = Ingredient
+    fields = ['aisle']
+
+class Ingredient_Delete(LoginRequiredMixin, DeleteView):
+    model = Ingredient
+    success_url = '/ingredients/'
