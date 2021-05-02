@@ -8,6 +8,8 @@ AISLE = (
     ('Pasta and Rice', 'Pasta and Rice'),
     ('Bakery/Bread', 'Bakery/Bread'),
     ('Produce', 'Produce'),
+    ('Meat/Sausages', 'Meat/Sausages'),
+    ('Poultry', 'Poultry'),
     ('Seafood', 'Seafood'),
     ('Cheese', 'Cheese'),
     ('Dried Fruits', 'Dried Fruits'), 
