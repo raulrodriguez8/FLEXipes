@@ -7,8 +7,9 @@ urlpatterns = [
     path('results/', views.recipe_results, name='recipe_results'),
     path('ingredients/', views.all_ingredients, name='all_ingredients'),
     path('ingredients/create/', views.add_ingredient, name='ingredient_create'),
+    path('ingredients/associate/<int:ingredient_id>/', views.assoc_ingredient, name='assoc_ingredient'), 
     path('ingredients/<int:pk>/update/', views.Ingredient_Update.as_view(), name='ingredient_update'),
-    path('ingredients/<int:pk>/delete/', views.Ingredient_Delete.as_view(), name='ingredient_delete'),   
+    path('ingredients/<int:pk>/delete/', views.Ingredient_Delete.as_view(), name='ingredient_delete'), 
     path('results/<int:recipe_id>', views.recipe_details, name='recipe_details'),
     
 ]
