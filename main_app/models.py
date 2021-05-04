@@ -40,13 +40,18 @@ class Ingredient(models.Model):
 
 
 class Meal(models.Model):
-    date = models.DateField('feeding date')
+    date = models.DateField('Planned Meal Date')
+    #meal is a string with 4 choices, starting with 'B', 'Breakfast' as default
     meal = models.CharField(max_length=1, choices=MEALS, default=MEALS[0][0])
+    # #recipe_name will be used to store the name of the recipe pulled back from the API call (if necessary)
+    # recipe_name = models.CharField()
+    # #recipe_url will be used to store the URL pulled back from the API call (if necessary)
+    # recipe_url  = models.CharField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         # Nice method for obtaining the friendly value of a Field.choice
-        return f"{self.get_meal_display()} on {self.date}"
+        return f"{self.meal} on {self.date}"
 
     # Add this method
     def get_absolute_url(self):
