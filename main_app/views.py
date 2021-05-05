@@ -41,17 +41,6 @@ def signup(request):
 def recipe_results(request):
     # api_key = 7276efa6287b40cc9b9703a7ed323fb3
     api_ingredients = Ingredient.objects.all()
-<<<<<<< HEAD
-    print(api_ingredients)
-    test_string = api_ingredients.all()
-    print(str(test_string))
-    naked_string = ""
-    for i in test_string:
-        naked_string = naked_string + i.name + ','
-    print(naked_string)
-    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=%s&number=10&ranking=1&ignorePantry=true&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % naked_string
-    print(url)
-=======
     # print(api_ingredients)
     test_string = api_ingredients.all()
     # print(str(test_string))
@@ -63,7 +52,6 @@ def recipe_results(request):
     url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=%s&number=10&ranking=1&ignorePantry=true&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % naked_string
     
     # print(url)
->>>>>>> main
     res = requests.get(url)
     data = json.loads(res.text)
     print(data)
@@ -77,12 +65,9 @@ def recipe_details(request, recipe_id):
 
     res = requests.get(url)
     data = json.loads(res.text)
-<<<<<<< HEAD
     print(data)
     meal_form = MealForm()
-=======
     # print(data)
->>>>>>> main
     context = {
         'data': data,
         'meal_form' : meal_form,
