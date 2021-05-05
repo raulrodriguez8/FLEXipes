@@ -21,7 +21,10 @@
     {% for ingredient in ingredients %}
     <li class='collection-item hoverable'>
         <div class="collection_content">
-        <a href="#!"><i class="material-icons small circle teal lighten-4">add</i></a>
+        <form action="{% url 'assoc_ingredient' ingredient.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn-flat secondary-content left" style="padding: 0; margin: 0 20px;"><i class="material-icons medium circle teal lighten-4" style="padding: 0 10px;">add</i></button>
+        </form>
         <h5 class='title' style="display: inline;">{{ ingredient.name }}</h5>
         </div>
     </li>
@@ -38,7 +41,10 @@
     {% for ingredient in user.profile.pantry.all %}
     <li class='collection-item hoverable'>
         <div class="collection_content">
-        <a href="#!"><i class="material-icons small circle teal lighten-4">remove</i></a>
+        <form action="{% url 'remove_ingredient' ingredient.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn-flat secondary-content left" style="padding: 0; margin: 0 20px;"><i class="material-icons medium circle teal lighten-4" style="padding: 0 10px;">remove</i></button>
+        </form>
         <h5 class='title' style="display: inline;">{{ ingredient.name }}</h5>
         </div>
     </li>

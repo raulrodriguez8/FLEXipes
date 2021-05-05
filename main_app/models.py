@@ -8,6 +8,8 @@ AISLE = (
     ('Pasta and Rice', 'Pasta and Rice'),
     ('Bakery/Bread', 'Bakery/Bread'),
     ('Produce', 'Produce'),
+    ('Meat/Sausages', 'Meat/Sausages'),
+    ('Poultry', 'Poultry'),
     ('Seafood', 'Seafood'),
     ('Cheese', 'Cheese'),
     ('Dried Fruits', 'Dried Fruits'), 
@@ -36,7 +38,7 @@ class Ingredient(models.Model):
     aisle = models.CharField(max_length=50, choices=AISLE, default=AISLE[0][0])
 
     def __str__(self):
-        return f"{self.name}: {self.aisle}"
+        return f"{self.name}"
 
 
 class Meal(models.Model):

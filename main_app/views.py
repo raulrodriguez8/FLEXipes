@@ -41,6 +41,7 @@ def signup(request):
 def recipe_results(request):
     # api_key = 7276efa6287b40cc9b9703a7ed323fb3
     api_ingredients = Ingredient.objects.all()
+<<<<<<< HEAD
     print(api_ingredients)
     test_string = api_ingredients.all()
     print(str(test_string))
@@ -50,6 +51,19 @@ def recipe_results(request):
     print(naked_string)
     url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=%s&number=10&ranking=1&ignorePantry=true&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % naked_string
     print(url)
+=======
+    # print(api_ingredients)
+    test_string = api_ingredients.all()
+    # print(str(test_string))
+    naked_string = ""
+    for i in test_string:
+        naked_string = naked_string + i.name + ','
+    # print(naked_string)
+
+    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=%s&number=10&ranking=1&ignorePantry=true&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % naked_string
+    
+    # print(url)
+>>>>>>> main
     res = requests.get(url)
     data = json.loads(res.text)
     print(data)
@@ -58,13 +72,17 @@ def recipe_results(request):
 
 
 def recipe_details(request, recipe_id):
-    print(recipe_id)
+    # print(recipe_id)
     url = 'https://api.spoonacular.com/recipes/%s/information?includeNutrition=false&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % recipe_id
 
     res = requests.get(url)
     data = json.loads(res.text)
+<<<<<<< HEAD
     print(data)
     meal_form = MealForm()
+=======
+    # print(data)
+>>>>>>> main
     context = {
         'data': data,
         'meal_form' : meal_form,
@@ -78,7 +96,7 @@ def all_ingredients(request):
     # print(my_ingredients)
     # print(request.user.profile.pantry.all())
     all_ingredients_not_in_user_pantry = Ingredient.objects.exclude(id__in=user_ingredients.values_list('id'))
-    print(all_ingredients_not_in_user_pantry)
+    # print(all_ingredients_not_in_user_pantry)
     ingredient_form = IngredientForm()
     context = {
         'ingredients': all_ingredients_not_in_user_pantry,
@@ -92,6 +110,17 @@ def add_ingredient(request):
     if form.is_valid():
         new_ingredient = form.save(commit=False)
         new_ingredient.save()
+    return redirect('all_ingredients')
+
+@login_required
+def assoc_ingredient(request, ingredient_id):
+    User.objects.get(id=request.user.id).profile.pantry.add(ingredient_id)
+    # print(User.objects.get(id=request.user.id).profile.pantry.all())
+    return redirect('all_ingredients')
+
+@login_required
+def remove_ingredient(request, ingredient_id):
+    User.objects.get(id=request.user.id).profile.pantry.remove(ingredient_id)
     return redirect('all_ingredients')
 
 class Ingredient_Update(LoginRequiredMixin, UpdateView):
