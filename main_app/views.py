@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 import requests
 import json
-from .models import User,Ingredient,Meal
+from .models import User, Ingredient, Meal, Profile
 from .forms import IngredientForm, MealForm
 
 # Default Views
@@ -54,13 +54,13 @@ def recipe_results(request):
     # print(url)
     res = requests.get(url)
     data = json.loads(res.text)
-    print(data)
+
     context = {'data': data}
     return render(request, 'recipes/results.html', context)
 
 
 def recipe_details(request, recipe_id):
-    # print(recipe_id)
+    
     url = 'https://api.spoonacular.com/recipes/%s/information?includeNutrition=false&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % recipe_id
 
     res = requests.get(url)
