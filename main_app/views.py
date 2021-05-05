@@ -42,11 +42,16 @@ def recipe_results(request):
     # api_key = 7276efa6287b40cc9b9703a7ed323fb3
     api_ingredients = Ingredient.objects.all()
     print(api_ingredients)
-    test_string = api_ingredients.all().values_list('name')
+    test_string = api_ingredients.all()
     print(str(test_string))
+    naked_string = ""
+    for i in test_string:
+        naked_string = naked_string + i.name + ','
+    print(naked_string)
 
-    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=%s&number=10&ranking=1&ignorePantry=true&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % api_ingredients
+    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=%s&number=10&ranking=1&ignorePantry=true&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % naked_string
     
+    print(url)
     res = requests.get(url)
     data = json.loads(res.text)
     context = {'data': data}
@@ -85,6 +90,11 @@ def add_ingredient(request):
     if form.is_valid():
         new_ingredient = form.save(commit=False)
         new_ingredient.save()
+    return redirect('all_ingredients')
+
+def assoc_ingredient(request, ingredient_id):
+    User.objects.get(id=request.user.id).profile.pantry.add(ingredient_id)
+    print(User.objects.get(id=request.user.id).profile.pantry.all())
     return redirect('all_ingredients')
 
 class Ingredient_Update(LoginRequiredMixin, UpdateView):
