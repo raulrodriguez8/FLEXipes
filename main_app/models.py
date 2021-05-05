@@ -53,7 +53,7 @@ class Meal(models.Model):
 
     def __str__(self):
         # Nice method for obtaining the friendly value of a Field.choice
-        return f"{self.get_meal_display()} on {self.date} is {self.meal}"
+        return f"{self.get_meal_display()} on {self.date} is {self.recipe_name}"
 
     # Add this method
     def get_absolute_url(self):
