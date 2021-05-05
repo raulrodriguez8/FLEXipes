@@ -25,7 +25,7 @@
                     <li><a href="">About</a></li>
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'all_ingredients' %}">Ingredients</a></li>
-                    <li><a href="">Meal Planning</a></li>
+                    <li><a href="{% url 'add_meal' %}">Meal Planning</a></li>
                     <li><a href="{% url 'logout' %}">Log Out</a></li>
                     {% else %}
                     <li><a href="{% url 'signup' %}">Sign Up</a></li>

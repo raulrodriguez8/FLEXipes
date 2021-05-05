@@ -102,12 +102,13 @@ class Ingredient_Delete(LoginRequiredMixin, DeleteView):
 
 #Meals Views
 @login_required
-def add_meal(request):
+def add_meal(request,recipe_id):
     form = MealForm(request.POST)
+    
     if form.is_valid():
         new_meal = form.save(commit=False)
         new_meal.save()
-    return redirect('recipe_details')
+    return redirect('recipe_details', recipe_id = recipe_id)
 
 # class Ingredient_Update(LoginRequiredMixin, UpdateView):
 #     model = Ingredient
