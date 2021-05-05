@@ -118,19 +118,19 @@ class Ingredient_Delete(LoginRequiredMixin, DeleteView):
 #Meals Views
 @login_required
 def add_meal(request,recipe_id):
-
+    user_id=request.user.id
     form = MealForm(request.POST)  
-    # if form.is_valid():
-    new_meal = form.save(commit=False)
-    new_meal.recipe_id = recipe_id
-    new_meal.save()
-    return redirect('/', recipe_id=recipe_id)
+    if form.is_valid():
+        new_meal = form.save(commit=False)
+        new_meal.recipe_id = recipe_id
+        new_meal.user_id = user_id
+        new_meal.save()
+    return redirect('/', recipe_id=recipe_id, user_id=user_id)
 
-# class Ingredient_Update(LoginRequiredMixin, UpdateView):
-#     model = Ingredient
-#     fields = ['aisle']
-
-# class Ingredient_Delete(LoginRequiredMixin, DeleteView):
-#     model = Ingredient
-#     success_url = '/ingredients/'
+@login_required
+def all_meals(request):
+    meals = Meal.objects.all()
+    context = {'meals': meals}
+    print(meals)
+    return render(request, 'meals/index.html', context)
 
