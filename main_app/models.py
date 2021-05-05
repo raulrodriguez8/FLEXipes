@@ -19,7 +19,6 @@ AISLE = (
     ('Milk, Eggs, Other Dairy', 'Milk, Eggs, Other Dairy'),
     ('Ethnic Foods', 'Ethnic Foods'),
     ('Tea and Coffee', 'Tea and Coffee'),
-    ('Refrigerated', 'Refrigerated'),
     ('Canned and Jarred', 'Canned and Jarred'),
     ('Frozen', 'Frozen'),
     ('Alcoholic Beverages', 'Alcoholic Beverages'),
@@ -39,6 +38,9 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+    class Meta:
+        ordering = ['aisle']
 
 
 class Meal(models.Model):

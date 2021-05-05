@@ -25,7 +25,7 @@
             {% csrf_token %}
             <button type="submit" class="btn-flat secondary-content left" style="padding: 0; margin: 0 20px;"><i class="material-icons medium circle teal lighten-4" style="padding: 0 10px;">add</i></button>
         </form>
-        <h5 class='title' style="display: inline;">{{ ingredient.name }}</h5>
+        <h5 class='title' style="display: inline;">{{ ingredient.name }}  <span class="new badge" data-badge-caption="">{{ ingredient.aisle }}</span> </h5>
         </div>
     </li>
     {% endfor %}
@@ -45,7 +45,7 @@
             {% csrf_token %}
             <button type="submit" class="btn-flat secondary-content left" style="padding: 0; margin: 0 20px;"><i class="material-icons medium circle teal lighten-4" style="padding: 0 10px;">remove</i></button>
         </form>
-        <h5 class='title' style="display: inline;">{{ ingredient.name }}</h5>
+        <h5 class='title' style="display: inline;">{{ ingredient.name }} <span class="new badge" data-badge-caption="">{{ ingredient.aisle }}</span></h5>
         </div>
     </li>
     {% empty %}

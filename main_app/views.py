@@ -70,7 +70,7 @@ def recipe_details(request, recipe_id):
     # print(data)
     context = {
         'data': data,
-        'meal_form' : meal_form,
+        'meal_form'  : meal_form,
         }
 
     return render(request, 'recipes/details.html', context)
