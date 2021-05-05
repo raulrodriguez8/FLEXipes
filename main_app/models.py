@@ -54,8 +54,8 @@ class Meal(models.Model):
         return f"{self.meal} on {self.date}"
 
     # Add this method
-    def get_absolute_url(self):
-        return reverse('detail', kwargs={'user_id': self.id})
+    # def get_absolute_url(self):
+    #     return reverse('detail', kwargs={'recipe_id': self.id})
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

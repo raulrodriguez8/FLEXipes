@@ -64,8 +64,10 @@ def recipe_details(request, recipe_id):
     res = requests.get(url)
     data = json.loads(res.text)
     print(data)
+    meal_form = MealForm()
     context = {
         'data': data,
+        'meal_form' : meal_form,
         }
 
     return render(request, 'recipes/details.html', context)
@@ -103,12 +105,13 @@ class Ingredient_Delete(LoginRequiredMixin, DeleteView):
 #Meals Views
 @login_required
 def add_meal(request,recipe_id):
-    form = MealForm(request.POST)
-    
-    if form.is_valid():
-        new_meal = form.save(commit=False)
-        new_meal.save()
-    return redirect('recipe_details', recipe_id = recipe_id)
+
+    form = MealForm(request.POST)  
+    # if form.is_valid():
+    new_meal = form.save(commit=False)
+    new_meal.recipe_id = recipe_id
+    new_meal.save()
+    return redirect('/', recipe_id=recipe_id)
 
 # class Ingredient_Update(LoginRequiredMixin, UpdateView):
 #     model = Ingredient

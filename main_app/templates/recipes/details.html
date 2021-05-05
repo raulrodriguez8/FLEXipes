@@ -5,11 +5,21 @@
 <h1>FLEXipes- Recipe Details</h1>
     <img src="{{data.image}}">
     <h1>{{ data.title}}</h1>
-    <a class="waves-effect waves btn">Add to Meal Plan</a>
+    <div>
+    <form action="{% url 'add_meal' data.id %}" method="post" class="col s4">
+        {% csrf_token %}
+        {{ meal_form.as_p }}
+        <input type="submit" class="btn" value="Add Meal">
+    </form>
+    </div>
     <p>Ready in {{ data.readyInMinutes}} minutes</p>
     <p>Servings: {{ data.servings }}</p>
     {{ data.summary }}
     <p>{{ data.instructions }}</p>
     <a href="{{ data.spoonacularSourceUrl}}" target="_blank">Link to full recipe</a>
 
+    <script>
+        var selectEl = document.getElementById('id_meal');
+        M.FormSelect.init(selectEl);
+      </script>
 {% endblock %}
