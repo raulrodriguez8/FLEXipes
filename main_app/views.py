@@ -9,11 +9,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 import requests
 import json
-from .models import Ingredient
-from .models import User
-from .forms import IngredientForm
+from .models import User,Ingredient,Meal
+from .forms import IngredientForm, MealForm
 
-# Create your views here.
+# Default Views
 
 def home(request):
     return render(request, 'home.html')
@@ -37,10 +36,22 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
+#Recipe Views
 @login_required
 def recipe_results(request):
     # api_key = 7276efa6287b40cc9b9703a7ed323fb3
     api_ingredients = Ingredient.objects.all()
+<<<<<<< HEAD
+    print(api_ingredients)
+    test_string = api_ingredients.all()
+    print(str(test_string))
+    naked_string = ""
+    for i in test_string:
+        naked_string = naked_string + i.name + ','
+    print(naked_string)
+    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=%s&number=10&ranking=1&ignorePantry=true&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % naked_string
+    print(url)
+=======
     # print(api_ingredients)
     test_string = api_ingredients.all()
     # print(str(test_string))
@@ -52,8 +63,10 @@ def recipe_results(request):
     url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=%s&number=10&ranking=1&ignorePantry=true&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % naked_string
     
     # print(url)
+>>>>>>> main
     res = requests.get(url)
     data = json.loads(res.text)
+    print(data)
     context = {'data': data}
     return render(request, 'recipes/results.html', context)
 
@@ -64,13 +77,20 @@ def recipe_details(request, recipe_id):
 
     res = requests.get(url)
     data = json.loads(res.text)
+<<<<<<< HEAD
+    print(data)
+    meal_form = MealForm()
+=======
     # print(data)
+>>>>>>> main
     context = {
         'data': data,
+        'meal_form' : meal_form,
         }
 
     return render(request, 'recipes/details.html', context)
 
+#Ingredients Views
 def all_ingredients(request):
     user_ingredients = User.objects.get(id=request.user.id).profile.pantry.all()
     # print(my_ingredients)
@@ -111,4 +131,22 @@ class Ingredient_Delete(LoginRequiredMixin, DeleteView):
     model = Ingredient
     success_url = '/ingredients/'
 
+#Meals Views
+@login_required
+def add_meal(request,recipe_id):
+
+    form = MealForm(request.POST)  
+    # if form.is_valid():
+    new_meal = form.save(commit=False)
+    new_meal.recipe_id = recipe_id
+    new_meal.save()
+    return redirect('/', recipe_id=recipe_id)
+
+# class Ingredient_Update(LoginRequiredMixin, UpdateView):
+#     model = Ingredient
+#     fields = ['aisle']
+
+# class Ingredient_Delete(LoginRequiredMixin, DeleteView):
+#     model = Ingredient
+#     success_url = '/ingredients/'
 
