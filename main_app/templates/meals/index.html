@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>FLEXipes Meals List</h1>
+{% for meal in meals %}
+  <div class="card teal-text text-accent-4">
+    <div class="card-content">
+      <span class="card-title">{{ meal }}</span>
+    </div>
+    </a>
+  </div>
+{% endfor %}
+{% endblock %}
