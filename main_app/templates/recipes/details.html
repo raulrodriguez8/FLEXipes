@@ -1,7 +1,7 @@
 
 {% extends 'base.html' %}
 {% block content %}
-
+{% autoescape off %}
 <h1>FLEXipes- Recipe Details</h1>
     <img src="{{data.image}}">
     <h1>{{ data.title}}</h1>
@@ -22,7 +22,6 @@
         var selectEl = document.getElementById('id_meal');
         M.FormSelect.init(selectEl);
 
-
         var dateEl = document.getElementById('id_date');
         M.Datepicker.init(dateEl, {
         format: 'yyyy-mm-dd',
@@ -32,5 +31,5 @@
         });
       </script>
 
-
+{% endautoescape %}
 {% endblock %}
