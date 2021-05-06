@@ -3,6 +3,7 @@
 
 <h1>FLEXipes Meals List</h1>
 {% for meal in meals %}
+  <a href="{{ meal.recipe_url }}">
   <div class="card teal-text text-accent-4">
     <div class="card-content">
       <span class="card-title">{{ meal }}</span>

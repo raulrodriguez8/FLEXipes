@@ -11,6 +11,7 @@ import requests
 import json
 from .models import User, Ingredient, Meal, Profile
 from .forms import IngredientForm, MealForm
+from dotted_dict import DottedDict
 
 # Default Views
 
@@ -118,14 +119,25 @@ class Ingredient_Delete(LoginRequiredMixin, DeleteView):
 
 #Meals Views
 @login_required
-def add_meal(request,recipe_id):
+def add_meal(request, recipe_id):
     user_id=request.user.id
-    form = MealForm(request.POST)  
+    form = MealForm(request.POST)
+    url = 'https://api.spoonacular.com/recipes/%s/information?includeNutrition=false&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % recipe_id
+    
+    res = requests.get(url)
+    data = json.loads(res.text)
+    print(data['title'])
+    recipe_name = data['title']
+    recipe_url = data['spoonacularSourceUrl']  
+    
     if form.is_valid():
         new_meal = form.save(commit=False)
         new_meal.recipe_id = recipe_id
         new_meal.user_id = user_id
+        new_meal.recipe_name = recipe_name
+        new_meal.recipe_url = recipe_url
         new_meal.save()
+
     return redirect('/', recipe_id=recipe_id, user_id=user_id)
 
 @login_required
