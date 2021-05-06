@@ -58,11 +58,11 @@ class Meal(models.Model):
 
     def __str__(self):
         # Nice method for obtaining the friendly value of a Field.choice
-        return f"{self.meal} on {self.date}"
+        return f"{self.get_meal_display()} on {self.date} is {self.recipe_name}"
 
     # Add this method
-    # def get_absolute_url(self):
-    #     return reverse('detail', kwargs={'recipe_id': self.id})
+    def get_absolute_url(self):
+        return reverse('all_meals', kwargs={'meal_id': self.id})
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

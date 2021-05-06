@@ -9,8 +9,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 import requests
 import json
-from .models import User,Ingredient,Meal
+from .models import User, Ingredient, Meal, Profile
 from .forms import IngredientForm, MealForm
+from dotted_dict import DottedDict
 
 # Default Views
 
@@ -54,13 +55,13 @@ def recipe_results(request):
     # print(url)
     res = requests.get(url)
     data = json.loads(res.text)
-    print(data)
+
     context = {'data': data}
     return render(request, 'recipes/results.html', context)
 
 
 def recipe_details(request, recipe_id):
-    # print(recipe_id)
+    
     url = 'https://api.spoonacular.com/recipes/%s/information?includeNutrition=false&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % recipe_id
 
     res = requests.get(url)
@@ -116,12 +117,31 @@ class Ingredient_Update(LoginRequiredMixin, UpdateView):
 
 #Meals Views
 @login_required
-def add_meal(request,recipe_id):
+def add_meal(request, recipe_id):
+    user_id=request.user.id
+    form = MealForm(request.POST)
+    url = 'https://api.spoonacular.com/recipes/%s/information?includeNutrition=false&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % recipe_id
+    
+    res = requests.get(url)
+    data = json.loads(res.text)
+    print(data['title'])
+    recipe_name = data['title']
+    recipe_url = data['spoonacularSourceUrl']  
+    
+    if form.is_valid():
+        new_meal = form.save(commit=False)
+        new_meal.recipe_id = recipe_id
+        new_meal.user_id = user_id
+        new_meal.recipe_name = recipe_name
+        new_meal.recipe_url = recipe_url
+        new_meal.save()
 
-    form = MealForm(request.POST)  
-    # if form.is_valid():
-    new_meal = form.save(commit=False)
-    new_meal.recipe_id = recipe_id
-    new_meal.save()
-    return redirect('/', recipe_id=recipe_id)
+    return redirect('/', recipe_id=recipe_id, user_id=user_id)
+
+@login_required
+def all_meals(request):
+    meals = Meal.objects.all()
+    context = {'meals': meals}
+    print(meals)
+    return render(request, 'meals/index.html', context)
 

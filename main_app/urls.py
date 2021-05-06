@@ -12,4 +12,5 @@ urlpatterns = [
     path('ingredients/<int:pk>/update/', views.Ingredient_Update.as_view(), name='ingredient_update'),
     path('results/<int:recipe_id>', views.recipe_details, name='recipe_details'),
     path('results/<int:recipe_id>/add/', views.add_meal, name='add_meal'),
+    path('meals/', views.all_meals, name='all_meals'),
 ]
