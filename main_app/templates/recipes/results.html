@@ -17,6 +17,16 @@
       <div class="card-content">
         <span class="card-title">{{recipe.title}}</span>
       </div>
+      <hr>
+      <div>
+    
+        <h5>Missing Ingredients</h5>
+      <ul>
+        {% for ingredient in recipe.missedIngredients%}
+        <li>{{ ingredient.originalName}}</li>
+        {% endfor %}
+      </ul>
+    </div>
     </div>
   </div>
 </div>
