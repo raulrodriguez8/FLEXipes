@@ -95,6 +95,7 @@ def add_ingredient(request):
     if form.is_valid():
         new_ingredient = form.save(commit=False)
         new_ingredient.save()
+        request.user.profile.pantry.add(new_ingredient.id)
     return redirect('all_ingredients')
 
 @login_required
@@ -110,11 +111,8 @@ def remove_ingredient(request, ingredient_id):
 
 class Ingredient_Update(LoginRequiredMixin, UpdateView):
     model = Ingredient
-    fields = ['aisle']
+    fields = ['name', 'aisle']
 
-class Ingredient_Delete(LoginRequiredMixin, DeleteView):
-    model = Ingredient
-    success_url = '/ingredients/'
 
 #Meals Views
 @login_required
@@ -126,12 +124,4 @@ def add_meal(request,recipe_id):
     new_meal.recipe_id = recipe_id
     new_meal.save()
     return redirect('/', recipe_id=recipe_id)
-
-# class Ingredient_Update(LoginRequiredMixin, UpdateView):
-#     model = Ingredient
-#     fields = ['aisle']
-
-# class Ingredient_Delete(LoginRequiredMixin, DeleteView):
-#     model = Ingredient
-#     success_url = '/ingredients/'
 
