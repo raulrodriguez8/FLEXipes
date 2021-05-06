@@ -3,15 +3,24 @@
 
 <h1>FLEXipes Home - Recipe Results</h1>
 
+
 {% for recipe in data %}
-  <div class="card teal-text text-accent-4">
-    <a href="{% url 'recipe_details' recipe.id %}">
-    <div class="card-content">
-      <span class="card-title">{{ recipe.title }}</span>
-      <img src="{{ recipe.image }}">
+
+<div class="row">
+  <div class="col s12 m6">
+    <div class="card">
+      <div class="card-image">
+        <img src="{{ recipe.image }}">
+        
+        <a href="{% url 'recipe_details' recipe.id %}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+      </div>
+      <div class="card-content">
+        <span class="card-title">{{recipe.title}}</span>
+      </div>
     </div>
-    </a>
   </div>
+</div>
+
 {% endfor %}
 
 {% endblock %}
