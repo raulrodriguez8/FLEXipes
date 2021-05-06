@@ -17,12 +17,12 @@
       <div class="card-content">
         <span class="card-title">{{recipe.title}}</span>
       </div>
-      <div>
-        <hr>
-        <h5>Missing Ingredients</h5>
+      <div class="card-action">
+
+        <p style="font-weight: bold; font-size: 2vh;">Missing Ingredients</p>
       <ul>
         {% for ingredient in recipe.missedIngredients%}
-        <li>{{ ingredient.originalName}}</li>
+        <li style="list-style-type: circle; text-transform:capitalize;">{{ ingredient.originalName}}</li>
         {% endfor %}
       </ul>
     </div>
