@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
+from django.utils.safestring import mark_safe
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -152,7 +153,7 @@ def all_meals(request):
 
 class CalendarView(generic.ListView):
     model = Meal
-    template_name = '/templates/meals/index.html'
+    template_name = 'meals/calendar.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -166,6 +167,7 @@ class CalendarView(generic.ListView):
         # Call the formatmonth method, which returns our calendar as a table
         html_cal = cal.formatmonth(withyear=True)
         context['calendar'] = mark_safe(html_cal)
+        print(context)
         return context
 
 def get_date(req_day):

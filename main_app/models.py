@@ -26,7 +26,7 @@ AISLE = (
 )
 
 MEALS = (
-    ('B', 'Breakfast'),
+    ('B', 'Breakfast',),
     ('R', 'Brunch'),
     ('L', 'Lunch'),
     ('D', 'Dinner')
@@ -42,7 +42,7 @@ class Ingredient(models.Model):
 
 
 class Meal(models.Model):
-    date = models.DateField('Planned Meal Date')
+    date = models.DateTimeField('Planned Meal Date')
     #meal is a string with 4 choices, starting with 'B', 'Breakfast' as default
     meal = models.CharField(max_length=1, choices=MEALS, default=MEALS[0][0])
     # #recipe_name will be used to store the name of the recipe pulled back from the API call (if necessary)
