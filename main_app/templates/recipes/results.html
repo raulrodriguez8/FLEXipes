@@ -1,17 +1,44 @@
 {% extends 'base.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="../../static/css/results.css">
+{% endblock %}
+
 {% block content %}
 
-<h1>FLEXipes Home - Recipe Results</h1>
+<h1>FLEXipes Results</h1>
 
-{% for recipe in data %}
-  <div class="card teal-text text-accent-4">
-    <a href="{% url 'recipe_details' recipe.id %}">
-    <div class="card-content">
-      <span class="card-title">{{ recipe.title }}</span>
-      <img src="{{ recipe.image }}">
+
+
+<div class="results">
+<div class="row">
+  {% for recipe in data %}
+  <div class="col s6">
+    <div class="card">
+      <div class="card-image">
+        <img src="{{ recipe.image }}">
+        
+        <a href="{% url 'recipe_details' recipe.id %}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+      </div>
+      <div class="card-content">
+        <span class="card-title">{{recipe.title}}</span>
+      </div>
+      <div class="card-action">
+
+        <p style="font-weight: bold; font-size: 2vh;">Missing Ingredients</p>
+      <ul>
+        {% for ingredient in recipe.missedIngredients%}
+        <li style="list-style-type: circle; text-transform:capitalize;">{{ ingredient.originalName}}</li>
+        {% endfor %}
+      </ul>
     </div>
-    </a>
+    </div>
   </div>
-{% endfor %}
+  {% endfor %}
+</div>
+
+
+
+</div>
 
 {% endblock %}

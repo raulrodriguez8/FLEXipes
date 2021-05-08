@@ -12,3 +12,16 @@ footer {
   padding-top: 0;
   text-align: right;
 }
+
+.select-wrapper {
+  padding: 0 10px;
+}
+
+.select-wrapper input.select-dropdown {
+  padding: 0 10px;
+  width: 250px;
+}
+
+input.btn {
+  margin: 0 10px;
+}
