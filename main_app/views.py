@@ -153,7 +153,12 @@ def add_meal(request, recipe_id):
         new_meal.recipe_url = recipe_url
         new_meal.save()
 
-    return redirect('meal_calendar', recipe_id=recipe_id, user_id=user_id)
+    context = {
+        'recipe_id': recipe_id, 
+        'user_id': user_id,
+    }
+
+    return render(request, 'meals/calendar.html', context)
 
 @login_required
 def all_meals(request):
