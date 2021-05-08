@@ -22,7 +22,13 @@ environ.Env.read_env()
 # Default Views
 
 def home(request):
-    return render(request, 'home.html')
+    url  = 'https://api.spoonacular.com/food/trivia/random?apiKey=d31853590b274ee0bf5e4b78d3c9f3c1'
+    res = requests.get(url)
+    data = json.loads(res.text)
+    context = {
+        'food_trivia': data['text']
+    }
+    return render(request, 'home.html', context)
 
 def signup(request):
     error_message = ''
