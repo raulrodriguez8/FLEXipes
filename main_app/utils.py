@@ -1,22 +1,25 @@
+# cal/utils.py
+
 from datetime import datetime, timedelta
 from calendar import HTMLCalendar
 from .models import Meal
 
 class Calendar(HTMLCalendar):
-	def __init__(self, date=None):
-		self.date = date
+	def __init__(self, year=None, month=None):
+		self.year = year
+		self.month = month
 		super(Calendar, self).__init__()
 
 	# formats a day as a td
 	# filter events by day
-	def formatday(self, date, meals):
-		meals_per_date = meals.filter(start_time__date=date)
+	def formatday(self, day, meals):
+		meals_per_day = meals.filter(start_time__day=day)
 		d = ''
-		for meal in meals_per_date:
+		for meal in meals_per_day:
 			d += f'<li> {meal.title} </li>'
 
-		if date != 0:
-			return f"<td><span class='date'>{date}</span><ul> {d} </ul></td>"
+		if day != 0:
+			return f"<td><span class='date'>{day}</span><ul> {d} </ul></td>"
 		return '<td></td>'
 
 	# formats a week as a tr 
@@ -29,10 +32,10 @@ class Calendar(HTMLCalendar):
 	# formats a month as a table
 	# filter meals by year and month
 	def formatmonth(self, withyear=True):
-		meals = meal.objects.filter(meal_date=self.date)
+		meals = Meal.objects.filter(start_time__year=self.year, start_time__month=self.month)
 
 		cal = f'<table border="0" cellpadding="0" cellspacing="0" class="calendar">\n'
-		# cal += f'{self.formatmonthname(self.year, self.month, withyear=withyear)}\n'
+		cal += f'{self.formatmonthname(self.year, self.month, withyear=withyear)}\n'
 		cal += f'{self.formatweekheader()}\n'
 		for week in self.monthdays2calendar(self.year, self.month):
 			cal += f'{self.formatweek(week, meals)}\n'
