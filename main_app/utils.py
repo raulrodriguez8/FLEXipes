@@ -27,7 +27,7 @@ class Calendar(HTMLCalendar):
 
 		if day != 0:
 			return f"<td><span class='date'>{day}</span><ul> {d} </ul></td>"
-		return '<td></td>'
+		return '<td style ="width:200px"></td>'
 
 	# formats a week as a tr 
 	def formatweek(self, theweek, meals):

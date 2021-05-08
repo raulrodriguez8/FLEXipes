@@ -2,4 +2,9 @@
 {% block content %}
 <h1>Plan Your Meals!</h1>
 {{ calendar }}
+<div class="clearfix">
+	<a class="btn btn-info left" href="{'% url 'meal_calendar' %}?{'{ prev_month }}"> Previous Month </a>
+	<a class="btn btn-info right" href="{'% url 'meal_calendar' %}?{'{ next_month }}"> Next Month </a>
+</div>
+
 {% endblock %}
