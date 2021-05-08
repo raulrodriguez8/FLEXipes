@@ -148,7 +148,7 @@ def all_meals(request):
     print(meals)
     return render(request, 'meals/index.html', context)
 
-class CalendarView(generic.ListView):
+class CalendarView(LoginRequiredMixin,generic.ListView):
     model = Meal
     template_name = 'meals/calendar.html'
 

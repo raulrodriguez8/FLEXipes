@@ -15,7 +15,15 @@ class Calendar(HTMLCalendar):
 		meals_per_day = meals.filter(date__day=day)
 		d = ''
 		for meal in meals_per_day:
-			d += f'<li> {meal.recipe_name} </li>'
+
+			if meal.meal == 'B':
+				d += f'<div class="center-align"><li style ="background-color: pink; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
+			elif meal.meal == 'R':
+				d += f'<div class="center-align"><li style ="background-color: yellow; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
+			elif meal.meal == 'L':
+				d += f'<div class="center-align"><li style ="background-color: orange; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
+			else:
+				d += f'<div class="center-align"><li style ="background-color: blue; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
 
 		if day != 0:
 			return f"<td><span class='date'>{day}</span><ul> {d} </ul></td>"
