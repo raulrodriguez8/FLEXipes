@@ -13,3 +13,18 @@ footer {
   text-align: right;
 }
 
+<<<<<<< HEAD
+=======
+.select-wrapper {
+  padding: 0 10px;
+}
+
+.select-wrapper input.select-dropdown {
+  padding: 0 10px;
+  width: 250px;
+}
+
+input.btn {
+  margin: 0 10px;
+}
+>>>>>>> 1c51e00e9892c95aeaaa532c0e87f5955a5390e4

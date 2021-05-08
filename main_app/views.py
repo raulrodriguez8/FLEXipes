@@ -65,12 +65,13 @@ def recipe_details(request, recipe_id):
     url = 'https://api.spoonacular.com/recipes/%s/information?includeNutrition=false&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % recipe_id
 
     res = requests.get(url)
-    data = json.loads(res.text)   
+    data = json.loads(res.text)
     print(data)
     meal_form = MealForm()
+    # print(data)
     context = {
         'data': data,
-        'meal_form' : meal_form,
+        'meal_form'  : meal_form,
         }
 
     return render(request, 'recipes/details.html', context)
@@ -95,6 +96,7 @@ def add_ingredient(request):
     if form.is_valid():
         new_ingredient = form.save(commit=False)
         new_ingredient.save()
+        request.user.profile.pantry.add(new_ingredient.id)
     return redirect('all_ingredients')
 
 @login_required
@@ -110,11 +112,8 @@ def remove_ingredient(request, ingredient_id):
 
 class Ingredient_Update(LoginRequiredMixin, UpdateView):
     model = Ingredient
-    fields = ['aisle']
+    fields = ['name', 'aisle']
 
-class Ingredient_Delete(LoginRequiredMixin, DeleteView):
-    model = Ingredient
-    success_url = '/ingredients/'
 
 #Meals Views
 @login_required
