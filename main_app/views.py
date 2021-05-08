@@ -19,6 +19,8 @@ env = environ.Env()
 # reading .env file
 environ.Env.read_env()
 
+API_KEY = env('API_KEY')
+
 # Default Views
 
 def home(request):
