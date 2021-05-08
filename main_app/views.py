@@ -16,7 +16,13 @@ from dotted_dict import DottedDict
 # Default Views
 
 def home(request):
-    return render(request, 'home.html')
+    url  = 'https://api.spoonacular.com/food/jokes/random?apiKey=d31853590b274ee0bf5e4b78d3c9f3c1'
+    res = requests.get(url)
+    food_joke = json.loads(res.text)
+    context = {
+        'food_joke': food_joke['text']
+    }
+    return render(request, 'home.html', context)
 
 def signup(request):
     error_message = ''

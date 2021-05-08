@@ -1,6 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>FLEXipes Home - Landing Page</h1>
+<h1>Welcome to FLEXipes <br>Recipes for Everyday Cooking</h1>
+
+<p class="intro0">
+    Tired of last minute grocery runs? We get it! <br>
+    FLEXipes is a Fun, Lean, Easy, eXperience for everybody from the home chef to the Suous Chef!
+</p>
+<div class="row">
+    <div class="intro1 col s4">
+        Designed to help you save on groceries by showing you 
+        recipes you can make with the ingredients you have on hand. Just tell us 
+        what is in your pantry, cooler, and freezer!
+    </div>
+    <div class="intro2 col s4">
+        Cut down on food waste. Over <a href="https://www.usda.gov/foodlossandwaste/why" target="_blank">one-third</a> 
+        of food in the US is tossed out or goes uneatten- a staggering 133 billion pounds of food every year!
+    </div>
+    <div class="intro3 col s4">
+        Personal meal plans that make the most of your time and budget! 
+        Avoid the stress of figuring out what's for dinner tonight by saving recipes to 
+        your calendar.
+    
+    </div>
+</div>
+
+<div class="quote">
+    {{food_joke}}
+</div>
+
 
 {% endblock %}
