@@ -13,6 +13,12 @@ from .models import User, Ingredient, Meal, Profile
 from .forms import IngredientForm, MealForm
 from dotted_dict import DottedDict
 
+import environ
+
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
+
 # Default Views
 
 def home(request):
@@ -40,7 +46,7 @@ def signup(request):
 #Recipe Views
 @login_required
 def recipe_results(request):
-    # api_key = 7276efa6287b40cc9b9703a7ed323fb3
+    API_KEY = env('API_KEY')
     pantry_ingredients = User.objects.get(id=request.user.id).profile.pantry.all()
     all_pantry_ingredients = pantry_ingredients.all()
     
