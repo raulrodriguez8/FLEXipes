@@ -26,7 +26,7 @@ AISLE = (
 )
 
 MEALS = (
-    ('B', 'Breakfast',),
+    ('B', 'Breakfast'),
     ('R', 'Brunch'),
     ('L', 'Lunch'),
     ('D', 'Dinner')
