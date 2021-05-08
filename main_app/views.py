@@ -17,11 +17,18 @@ from .forms import IngredientForm, MealForm
 from .utils import Calendar
 from dotted_dict import DottedDict
 
+import environ
+
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
+
+API_KEY = env('API_KEY')
 
 # Default Views
 
 def home(request):
-    url  = 'https://api.spoonacular.com/food/trivia/random?apiKey=d31853590b274ee0bf5e4b78d3c9f3c1'
+    url  = 'https://api.spoonacular.com/food/trivia/random?apiKey='+API_KEY+''
     res = requests.get(url)
     data = json.loads(res.text)
     context = {
@@ -51,7 +58,7 @@ def signup(request):
 #Recipe Views
 @login_required
 def recipe_results(request):
-    # api_key = 7276efa6287b40cc9b9703a7ed323fb3
+
     pantry_ingredients = User.objects.get(id=request.user.id).profile.pantry.all()
     all_pantry_ingredients = pantry_ingredients.all()
     
@@ -60,7 +67,7 @@ def recipe_results(request):
         pantry_ingredients_string = pantry_ingredients_string + i.name + ','
     
 
-    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=%s&number=10&ranking=1&ignorePantry=true&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % pantry_ingredients_string
+    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+pantry_ingredients_string+'&number=10&ranking=1&ignorePantry=true&apiKey='+API_KEY+''
     
     res = requests.get(url)
     data = json.loads(res.text)
@@ -70,8 +77,8 @@ def recipe_results(request):
 
 
 def recipe_details(request, recipe_id):
-    
-    url = 'https://api.spoonacular.com/recipes/%s/information?includeNutrition=false&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % recipe_id
+    id = str(recipe_id)
+    url = 'https://api.spoonacular.com/recipes/'+id+'/information?includeNutrition=false&apiKey='+API_KEY+''
 
     res = requests.get(url)
     data = json.loads(res.text)
@@ -127,9 +134,10 @@ class Ingredient_Update(LoginRequiredMixin, UpdateView):
 #Meals Views
 @login_required
 def add_meal(request, recipe_id):
+    id = str(recipe_id)
     user_id=request.user.id
     form = MealForm(request.POST)
-    url = 'https://api.spoonacular.com/recipes/%s/information?includeNutrition=false&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % recipe_id
+    url = 'https://api.spoonacular.com/recipes/'+id+'/information?includeNutrition=false&apiKey=7276efa6287b40cc9b9703a7ed323fb3'
     
     res = requests.get(url)
     data = json.loads(res.text)
@@ -145,7 +153,12 @@ def add_meal(request, recipe_id):
         new_meal.recipe_url = recipe_url
         new_meal.save()
 
-    return redirect('/', recipe_id=recipe_id, user_id=user_id)
+    context = {
+        'recipe_id': recipe_id, 
+        'user_id': user_id,
+    }
+
+    return render(request, 'meals/calendar.html', context)
 
 @login_required
 def all_meals(request):
