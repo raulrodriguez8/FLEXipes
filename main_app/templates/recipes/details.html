@@ -1,26 +1,45 @@
-
 {% extends 'base.html' %}
 {% block content %}
-{% autoescape off %}
-<h1>FLEXipes- Recipe Details</h1>
-    <img src="{{data.image}}">
-    <h1>{{ data.title}}</h1>
-    <div>
-    <form action="{% url 'add_meal' data.id %}" method="post" class="col s4">
-        {% csrf_token %}
-        {{ meal_form.as_p }}
-        <input type="submit" class="btn" value="Add Meal">
-    </form>
+
+<h1>{{ data.title}}</h1>
+
+
+<div class="row">
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+            <img src="{{data.image}}">
+        </div>
+        <div class="card-content">
+            <p>Ready in {{ data.readyInMinutes}} minutes</p>
+            <p>Servings: {{ data.servings }}</p>
+        </div>
+      </div>
     </div>
-    <p>Ready in {{ data.readyInMinutes}} minutes</p>
-    <p>Servings: {{ data.servings }}</p>
+  </div>
+    
+    
+    <h5>Summary</h5>
+    {% autoescape off %}
     {{ data.summary }}
+    <h5>Cooking Instructions</h5>
     <p>{{ data.instructions }}</p>
-    <a href="{{ data.spoonacularSourceUrl}}" target="_blank">Link to full recipe</a>
+    {% endautoescape %}
+    <a class="btn" href="{{ data.spoonacularSourceUrl}}" target="_blank">Go to full recipe</a>
+
+    <h4>Planning your meals? Add this to your calendar!</h4>
+    <div>
+        <form action="{% url 'add_meal' data.id %}" method="post" class="col s4">
+            {% csrf_token %}
+            {{ meal_form.as_p }}
+            <input type="submit" class="btn" value="Add Meal">
+        </form>
+        </div>
 
     <script>
         var selectEl = document.getElementById('id_meal');
         M.FormSelect.init(selectEl);
+
 
         var dateEl = document.getElementById('id_date');
         M.Datepicker.init(dateEl, {
@@ -31,5 +50,5 @@
         });
       </script>
 
-{% endautoescape %}
+
 {% endblock %}
