@@ -1,9 +1,12 @@
+from datetime import datetime
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
+from django.views import generic
+from django.utils.safestring import mark_safe
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -11,6 +14,7 @@ import requests
 import json
 from .models import User, Ingredient, Meal, Profile
 from .forms import IngredientForm, MealForm
+from .utils import Calendar
 from dotted_dict import DottedDict
 
 import environ
@@ -156,4 +160,29 @@ def all_meals(request):
     context = {'meals': meals}
     print(meals)
     return render(request, 'meals/index.html', context)
+
+class CalendarView(LoginRequiredMixin,generic.ListView):
+    model = Meal
+    template_name = 'meals/calendar.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # use today's date for the calendar
+        d = get_date(self.request.GET.get('day', None))
+
+        # Instantiate our calendar class with today's year and date
+        cal = Calendar(d.year, d.month)
+
+        # Call the formatmonth method, which returns our calendar as a table
+        html_cal = cal.formatmonth(withyear=True)
+        context['calendar'] = mark_safe(html_cal)
+        print(context)
+        return context
+
+def get_date(req_day):
+    if req_day:
+        year, month = (int(x) for x in req_day.split('-'))
+        return date(year, month, day=1)
+    return datetime.today()
 
