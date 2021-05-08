@@ -1,0 +1,8 @@
+.results {
+    display: grid !important;
+    align-content: center;
+    justify-content: center;
+    grid-template-columns: 50 50;
+    margin: 10px;
+    padding: 10px;
+    }
