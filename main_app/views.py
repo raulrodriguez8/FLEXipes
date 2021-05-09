@@ -45,7 +45,7 @@ def signup(request):
 
 #Recipe Views
 @login_required
-def recipe_results(request):
+def recipe_results(request, page):
     # api_key = 7276efa6287b40cc9b9703a7ed323fb3
     pantry_ingredients = User.objects.get(id=request.user.id).profile.pantry.all()
     all_pantry_ingredients = pantry_ingredients.all()
@@ -54,19 +54,23 @@ def recipe_results(request):
     for i in all_pantry_ingredients:
         pantry_ingredients_string = pantry_ingredients_string + i.name + ','
     
-
-    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=%s&number=10&ranking=1&ignorePantry=true&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % pantry_ingredients_string
+    print(pantry_ingredients_string)
+    offset = 10 * page
+    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients={pantry}&number=10&offset={offset}&ranking=1&ignorePantry=true&apiKey=2b13a7c2199445e08d4a4ff0b3f3cf99'.format(pantry=pantry_ingredients_string, offset=offset)
     
     res = requests.get(url)
     data = json.loads(res.text)
 
-    context = {'data': data}
+    context = {
+        'data': data,
+        'page': page
+    }
     return render(request, 'recipes/results.html', context)
 
 
 def recipe_details(request, recipe_id):
     
-    url = 'https://api.spoonacular.com/recipes/%s/information?includeNutrition=false&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % recipe_id
+    url = 'https://api.spoonacular.com/recipes/{recipe}/information?includeNutrition=false&apiKey=7276efa6287b40cc9b9703a7ed323fb3'.format(recipe=recipe_id)
 
     res = requests.get(url)
     data = json.loads(res.text)

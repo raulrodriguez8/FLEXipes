@@ -36,9 +36,11 @@
   </div>
   {% endfor %}
 </div>
-
-
-
 </div>
+
+<ul class="pagination">
+  <li class="waves-effect"><a href="{% url 'recipe_results' page %}"><i class="material-icons">chevron_left</i></a></li>
+  <li class="waves-effect"><a href="{% url 'recipe_results' page %}"><i class="material-icons">chevron_right</i></a></li>
+</ul>
 
 {% endblock %}
