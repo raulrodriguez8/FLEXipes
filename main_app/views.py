@@ -1,9 +1,12 @@
+from datetime import datetime
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
+from django.views import generic
+from django.utils.safestring import mark_safe
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -11,12 +14,21 @@ import requests
 import json
 from .models import User, Ingredient, Meal, Profile
 from .forms import IngredientForm, MealForm
+from .utils import Calendar
 from dotted_dict import DottedDict
+
+import environ
+
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
+
+API_KEY = env('API_KEY')
 
 # Default Views
 
 def home(request):
-    url  = 'https://api.spoonacular.com/food/trivia/random?apiKey=d31853590b274ee0bf5e4b78d3c9f3c1'
+    url  = 'https://api.spoonacular.com/food/trivia/random?apiKey='+API_KEY+''
     res = requests.get(url)
     data = json.loads(res.text)
     context = {
@@ -46,7 +58,6 @@ def signup(request):
 #Recipe Views
 @login_required
 def recipe_results(request, page):
-    # api_key = 7276efa6287b40cc9b9703a7ed323fb3
     pantry_ingredients = User.objects.get(id=request.user.id).profile.pantry.all()
     all_pantry_ingredients = pantry_ingredients.all()
     
@@ -54,9 +65,9 @@ def recipe_results(request, page):
     for i in all_pantry_ingredients:
         pantry_ingredients_string = pantry_ingredients_string + i.name + ','
     
-    print(pantry_ingredients_string)
     offset = 10 * page
-    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients={pantry}&number=10&offset={offset}&ranking=1&ignorePantry=true&apiKey=2b13a7c2199445e08d4a4ff0b3f3cf99'.format(pantry=pantry_ingredients_string, offset=offset)
+
+    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+pantry_ingredients_string+'&number=10&offset='+offset+'&ranking=1&ignorePantry=true&apiKey='+API_KEY+''
     
     res = requests.get(url)
     data = json.loads(res.text)
@@ -69,8 +80,8 @@ def recipe_results(request, page):
 
 
 def recipe_details(request, recipe_id):
-    
-    url = 'https://api.spoonacular.com/recipes/{recipe}/information?includeNutrition=false&apiKey=7276efa6287b40cc9b9703a7ed323fb3'.format(recipe=recipe_id)
+    id = str(recipe_id)
+    url = 'https://api.spoonacular.com/recipes/'+id+'/information?includeNutrition=false&apiKey='+API_KEY+''
 
     res = requests.get(url)
     data = json.loads(res.text)
@@ -126,9 +137,10 @@ class Ingredient_Update(LoginRequiredMixin, UpdateView):
 #Meals Views
 @login_required
 def add_meal(request, recipe_id):
+    id = str(recipe_id)
     user_id=request.user.id
     form = MealForm(request.POST)
-    url = 'https://api.spoonacular.com/recipes/%s/information?includeNutrition=false&apiKey=7276efa6287b40cc9b9703a7ed323fb3' % recipe_id
+    url = 'https://api.spoonacular.com/recipes/'+id+'/information?includeNutrition=false&apiKey=7276efa6287b40cc9b9703a7ed323fb3'
     
     res = requests.get(url)
     data = json.loads(res.text)
@@ -144,7 +156,12 @@ def add_meal(request, recipe_id):
         new_meal.recipe_url = recipe_url
         new_meal.save()
 
-    return redirect('/', recipe_id=recipe_id, user_id=user_id)
+    context = {
+        'recipe_id': recipe_id, 
+        'user_id': user_id,
+    }
+
+    return render(request, 'meals/calendar.html', context)
 
 @login_required
 def all_meals(request):
@@ -152,4 +169,29 @@ def all_meals(request):
     context = {'meals': meals}
     print(meals)
     return render(request, 'meals/index.html', context)
+
+class CalendarView(LoginRequiredMixin,generic.ListView):
+    model = Meal
+    template_name = 'meals/calendar.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # use today's date for the calendar
+        d = get_date(self.request.GET.get('day', None))
+
+        # Instantiate our calendar class with today's year and date
+        cal = Calendar(d.year, d.month)
+
+        # Call the formatmonth method, which returns our calendar as a table
+        html_cal = cal.formatmonth(withyear=True)
+        context['calendar'] = mark_safe(html_cal)
+        print(context)
+        return context
+
+def get_date(req_day):
+    if req_day:
+        year, month = (int(x) for x in req_day.split('-'))
+        return date(year, month, day=1)
+    return datetime.today()
 

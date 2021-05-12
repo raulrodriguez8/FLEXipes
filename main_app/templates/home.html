@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="../../static/css/home.css">
+{% endblock %}
+
 {% block content %}
-
+<div class="home-page">
+    
 <h1 class="center-align">Welcome to FLEXipes<br><span style="font-size: 2.9rem; margin:0">Recipes for Everyday Cooking</span></h1>
-
+<div class="container">
 <h4 class="intro0 center-align">
     Tired of last minute grocery runs? We get it! <br>
     FLEXipes is a Fun, Lean, Easy, eXperience for everybody <br>from the home cook to the Sous Chef!
@@ -37,6 +43,7 @@
 <h4 class="quote center-align" style="font-style: italic;">
     "{{food_trivia}}"
 </h4>
-
+</div>
+</div>
 
 {% endblock %}

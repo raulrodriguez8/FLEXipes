@@ -13,4 +13,5 @@ urlpatterns = [
     path('results/<int:recipe_id>/', views.recipe_details, name='recipe_details'),
     path('results/<int:recipe_id>/add/', views.add_meal, name='add_meal'),
     path('meals/', views.all_meals, name='all_meals'),
+    path('meals/calendar/', views.CalendarView.as_view(), name='meal_calendar'),
 ]
