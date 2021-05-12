@@ -10,4 +10,4 @@ class IngredientForm(ModelForm):
 class MealForm(ModelForm):
     class Meta:
         model = Meal
-        fields = ['date', 'meal']
+        fields = ['date', 'meal', 'recipe_name', 'recipe_url']
