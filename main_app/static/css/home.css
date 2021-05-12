@@ -1,9 +1,7 @@
 .home-page {
     background-image: url("../images/flexipes_home.jpg");
-    height: 100vh;
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     background-attachment: fixed;
     display: flex;
     flex-direction: column;
@@ -11,4 +9,17 @@
     align-items: center;
     color: white;
     
+}
+
+.home-page-text {
+    position: relative !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+material-icons {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
