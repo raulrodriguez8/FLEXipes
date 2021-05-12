@@ -67,7 +67,7 @@ def recipe_results(request, page):
     
     offset = 10 * page
 
-    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+pantry_ingredients_string+'&number=10&offset='+offset+'&ranking=1&ignorePantry=true&apiKey='+API_KEY+''
+    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+pantry_ingredients_string+'&number=10&offset='+str(offset)+'&ranking=1&ignorePantry=true&apiKey='+API_KEY+''
     
     res = requests.get(url)
     data = json.loads(res.text)
