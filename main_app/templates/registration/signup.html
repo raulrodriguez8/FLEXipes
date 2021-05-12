@@ -6,15 +6,14 @@
 {% endblock %}
 
 {% block content %}
-{% load crispy_forms_tags %}
-<div class="container sign-up-form">
-<h1 style="text-align: center;">Sign Up for FLEXipes</h1>
+<div class="container">
+<h1>Sign Up for FLEXipes</h1>
 
 {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
 
 <form method="post" action="{% url 'signup' %}">
     {% csrf_token %}
-  {{ form|crispy }}
+  {{ form.as_p }}
   <input type="submit" class="btn" value="signup">
 </form>
 </div>
