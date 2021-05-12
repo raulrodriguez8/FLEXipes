@@ -154,6 +154,11 @@ def all_meals(request):
     print(meals)
     return render(request, 'meals/index.html', context)
 
+class Meal_Update(LoginRequiredMixin, UpdateView):
+    model = Meal
+    fields = ['date', 'meal']
+
+#Calendar Views
 class CalendarView(LoginRequiredMixin,generic.ListView):
     model = Meal
     template_name = 'meals/calendar.html'

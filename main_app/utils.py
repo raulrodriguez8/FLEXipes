@@ -17,16 +17,16 @@ class Calendar(HTMLCalendar):
 		for meal in meals_per_day:
 
 			if meal.meal == 'B':
-				d += f'<div class="center-align"><li style ="background-color: pink; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
+				d += f'<div><li style ="background-color: pink; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
 			elif meal.meal == 'R':
-				d += f'<div class="center-align"><li style ="background-color: yellow; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
+				d += f'<div><li style ="background-color: yellow; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
 			elif meal.meal == 'L':
-				d += f'<div class="center-align"><li style ="background-color: orange; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
+				d += f'<div><li style ="background-color: orange; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
 			else:
-				d += f'<div class="center-align"><li style ="background-color: blue; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
+				d += f'<div><li style ="background-color: blue; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
 
 		if day != 0:
-			return f"<td><span class='date'>{day}</span><ul> {d} </ul></td>"
+			return f'<td style="vertical-align: top;text-align: left;"><span class="date">{day}</span><ul> {d} </ul></td>'
 		return '<td style ="width:200px"></td>'
 
 	# formats a week as a tr 
@@ -34,7 +34,7 @@ class Calendar(HTMLCalendar):
 		week = ''
 		for d, weekday in theweek:
 			week += self.formatday(d, meals)
-		return f'<tr> {week} </tr>'
+		return f'<tr style="height:250px;"> {week} </tr>'
 
 	# formats a month as a table
 	# filter events by year and month
