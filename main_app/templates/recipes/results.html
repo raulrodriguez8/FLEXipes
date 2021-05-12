@@ -34,13 +34,22 @@
     </div>
     </div>
   </div>
+  {% empty %}
+  <h3 class="no_results">
+    Sorry, no more results!
+  </h3>
   {% endfor %}
 </div>
 </div>
 
-<ul class="pagination">
-  <li class="waves-effect"><a href="{% url 'recipe_results' page %}"><i class="material-icons">chevron_left</i></a></li>
-  <li class="waves-effect"><a href="{% url 'recipe_results' page %}"><i class="material-icons">chevron_right</i></a></li>
+
+<ul class="pagination center-align">
+  {% if page > 0 %}
+  <a href="{% url 'recipe_results' page|add:'-1' %}"><li class="btn-floating btn-large waves-effect waves-light teal darken-1"><i class="material-icons large">chevron_left</i></li></a>
+  {% endif %}
+  {% if data %}
+  <a href="{% url 'recipe_results' page|add:'1' %}"><li class="btn-floating btn-large waves-effect waves-light teal darken-1"><i class="material-icons large">chevron_right</i></li></a>
+  {% endif %}
 </ul>
 
 {% endblock %}
