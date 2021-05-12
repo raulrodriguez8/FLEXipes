@@ -7,8 +7,8 @@
   <div class="card teal-text text-accent-4">
     <div class="card-content">
       <span class="card-title">{{ meal }}</span>
-    </div>
-    </a>
+      <a class="waves-effect waves-light btn-small red" href="{% url 'remove_meal' meal.id %}"><i class="material-icons right">remove_circle</i>Delete Meal</a>
+      <a class="waves-effect waves-light btn-small green" href="{% url 'meal_update' meal.id %}"><i class="material-icons right">update</i>Edit Meal</a>
   </div>
 {% endfor %}
 {% endblock %}
