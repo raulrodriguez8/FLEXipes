@@ -23,7 +23,7 @@ It’s as Easy as that!
 
 -**F**ast
 
--**L**azy
+-**L**ean
 
 -**E**asy
 
