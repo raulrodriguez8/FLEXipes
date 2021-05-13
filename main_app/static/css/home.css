@@ -1,8 +1,5 @@
 .home-page {
-    background-image: url("../images/flexipes_home.jpg");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,12 +8,22 @@
     
 }
 
+.home-page::before{
+    content: " " !important;
+    background-image: url("../images/flexipes_home_copy.jpg");
+    background-size: cover;
+    position: absolute;
+    background-attachment: fixed;
+    opacity: 0.5 !important;
+}
+
 .home-page-text {
     position: relative !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
 }
+
 
 material-icons {
     display: inline-flex;
