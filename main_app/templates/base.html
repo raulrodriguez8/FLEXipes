@@ -16,6 +16,7 @@
     {% block styles %}
 
     <link rel="stylesheet" href="../static/css/results.css">
+    <link rel="stylesheet" href="../static/css/calendar.css">
     <link rel="stylesheet" href="../static/css/home.css">
     <link rel="stylesheet" href="../static/css/auth.css">
     {% endblock %}
@@ -33,7 +34,7 @@
                 <ul class="right">
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'all_ingredients' %}">Ingredients</a></li>
-                    <li><a href="{% url 'recipe_results' %}">Recipes</a></li>
+                    <li><a href="{% url 'recipe_results' 0 %}">Recipes</a></li>
                     <li><a href="{% url 'meal_calendar' %}">Meal Planning</a></li>
                     <li><a href="{% url 'logout' %}">Log Out</a></li>
                     {% else %}

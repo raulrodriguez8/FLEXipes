@@ -10,8 +10,8 @@ main {
 }
 
 footer {
-  padding-top: 0 !important;
-  text-align: right !important;
+  padding-top: 0;
+  text-align: right;
 }
 
 .select-wrapper {
