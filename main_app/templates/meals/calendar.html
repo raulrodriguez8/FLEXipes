@@ -2,17 +2,19 @@
 {% block styles %}
     <link rel="stylesheet" href="../../static/css/results.css">
 {% endblock %}
+
 {% block content %}
 <h1>Plan Your Meals!</h1><div>
-<a class="waves-effect waves-light btn light-green darken-4" style="position: absolute; right: 0;" href="{% url 'all_meals' %}"">Manage Meals</a>
+<a class="waves-effect waves-light btn light-green darken-4" style="position: absolute; right: 0;" href="{% url 'all_meals' %}">Manage Meals</a>
 <br>
 <br>
 <br>
+
 <div class="clearfix">
 	<a class="btn btn-info left" href="{'% url 'meal_calendar' %}?{'{ prev_month }}"> Previous Month </a>
 	<a class="btn btn-info right" href="{'% url 'meal_calendar' %}?{'{ next_month }}"> Next Month </a>
+	
 </div>
+
 {{ calendar }}
-
-
 {% endblock %}
