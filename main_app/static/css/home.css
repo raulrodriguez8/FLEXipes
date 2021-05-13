@@ -1,5 +1,5 @@
 .home-page {
-    background-image: url("../images/flexipes_home.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/flexipes_home.jpg");
     height: 100vh;
     background-size: cover;
     background-position: center;
@@ -9,3 +9,10 @@
     align-items: center;
     color: white;
 }
+
+material-icons {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
