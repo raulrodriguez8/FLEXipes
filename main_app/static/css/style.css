@@ -48,3 +48,7 @@ input.btn {
   text-align: center;
   font-size: 40px;
 }
+
+.sign-up-form input {
+  margin: auto !important;
+}
