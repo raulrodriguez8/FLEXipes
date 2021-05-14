@@ -15,7 +15,7 @@
 
 
     {% block styles %}
-
+    <link rel="stylesheet" type="text/css" href="/../static/css/style.css">
     <link rel="stylesheet" href="../static/css/results.css">
     <link rel="stylesheet" href="../static/css/calendar.css">
     <link rel="stylesheet" href="../static/css/home.css">
@@ -46,11 +46,13 @@
     </header>
     <main class="">
         {% block content %}
+
+
         {% endblock %}
     </main>
-    <footer class="page-footer" style="background-color: #336036;">
-        <div class="right">All Rights Reserved, &copy; 2021 FLEXipes &nbsp;</div>
-    </footer>
+    {% block footer %}
+    {% include 'footer.html' %}
+    {% endblock %}
 </body>
 
 </html>

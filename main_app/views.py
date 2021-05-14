@@ -173,7 +173,7 @@ class Meal_Delete(LoginRequiredMixin, DeleteView):
 
 class Meal_Update(LoginRequiredMixin, UpdateView):
     model = Meal
-    fields = ['date', 'meal', 'recipe_name', 'recipe_url']
+    fields = ['date', 'meal']
 
 #Calendar Views
 class CalendarView(LoginRequiredMixin,generic.ListView):
