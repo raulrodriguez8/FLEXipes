@@ -12,3 +12,7 @@
     align-items: center;
     justify-content: center;
 }
+
+main {
+    background-color: #FEF5EC !important;
+}

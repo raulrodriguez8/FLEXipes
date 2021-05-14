@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+<div>
 <div class="results-header container" style="text-align: center;">
 <h1>FLEXipes Results</h1>
 </div>
@@ -51,5 +52,6 @@
   <a href="{% url 'recipe_results' page|add:'1' %}"><li class="btn-floating btn-large waves-effect waves-light teal darken-1"><i class="material-icons large">chevron_right</i></li></a>
   {% endif %}
 </ul>
+</div>
 
 {% endblock %}

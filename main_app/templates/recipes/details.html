@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<div class="detail-page">
 <h1>{{ data.title}}</h1>
 
 
@@ -35,7 +36,7 @@
             <input type="submit" class="btn" value="Add Meal">
         </form>
         </div>
-
+      </div>
     <script>
         var selectEl = document.getElementById('id_meal');
         M.FormSelect.init(selectEl);
