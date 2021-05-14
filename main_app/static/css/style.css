@@ -52,3 +52,11 @@ input.btn {
 .sign-up-form input {
   margin: auto !important;
 }
+
+.datepicker-date-display {
+  background-color: #4F5C7D !important;
+}
+
+.datepicker-table td.is-selected {
+  background-color: #4F5C7D !important;
+}

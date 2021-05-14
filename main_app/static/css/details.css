@@ -18,3 +18,15 @@
     align-content: center;
     flex-wrap: wrap;
 }
+
+.datepicker-date-display {
+    background-color: #4F5C7D !important;
+}
+
+.datepicker-table td.is-selected {
+    background-color: #4F5C7D !important;
+}
+
+.datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {
+    color: #4F5C7D;
+}
