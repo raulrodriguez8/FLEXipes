@@ -5,4 +5,14 @@
     grid-template-columns: 50 50;
     margin: 10vh;
     padding: 10px;
-    }
+}
+
+.results-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    background-color: #FEF5EC !important;
+}

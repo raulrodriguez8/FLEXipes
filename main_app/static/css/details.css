@@ -1,0 +1,38 @@
+.detail-page {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.detail-page h1 {
+    font-size: 3.2rem;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.datepicker-date-display {
+    background-color: #4F5C7D !important;
+}
+
+.datepicker-table td.is-selected {
+    background-color: #4F5C7D !important;
+}
+
+.datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {
+    color: #4F5C7D;
+}
+
+.meal-form{
+    border: 3px solid black;
+    margin: 10vh;
+    padding: 5vh 10vh;
+}

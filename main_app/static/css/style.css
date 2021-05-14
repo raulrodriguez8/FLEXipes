@@ -40,7 +40,7 @@ input.btn {
   margin-right: 5vh;
   color: black;
   padding: 10px;
-  border:  black 2px solid;
+  border:  #4F5C7D 2px solid;
   margin-top: 25px;
 }
 
@@ -51,4 +51,12 @@ input.btn {
 
 .sign-up-form input {
   margin: auto !important;
+}
+
+.datepicker-date-display {
+  background-color: #4F5C7D !important;
+}
+
+.datepicker-table td.is-selected {
+  background-color: #4F5C7D !important;
 }
