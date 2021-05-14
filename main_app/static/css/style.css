@@ -40,7 +40,7 @@ input.btn {
   margin-right: 5vh;
   color: black;
   padding: 10px;
-  border:  black 2px solid;
+  border:  #4F5C7D 2px solid;
   margin-top: 25px;
 }
 
@@ -51,4 +51,9 @@ input.btn {
 
 .sign-up-form input {
   margin: auto !important;
+}
+
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
 }
