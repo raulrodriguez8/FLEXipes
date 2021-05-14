@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{% block styles %}
+    <link rel="stylesheet" href="../../static/css/style.css">
+{% endblock %}
+
 <h1>FLEXipes Meals List</h1>
 {% for meal in meals %}
   <a href="{{ meal.recipe_url }}" target="_blank">

@@ -7,6 +7,7 @@ body {
 main {
   flex: 1 0 auto !important;
   height: calc(100vh - 38px);
+  background-color: #FEF5EC;
 }
 
 footer {
@@ -25,4 +26,29 @@ footer {
 
 input.btn {
   margin: 0 10px;
+}
+
+.sign-up-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.sign-up-form {
+  background: white;
+  margin-left: 5vh;
+  margin-right: 5vh;
+  color: black;
+  padding: 10px;
+  border:  black 2px solid;
+  margin-top: 25px;
+}
+
+.sign-up-form h1 {
+  text-align: center;
+  font-size: 40px;
+}
+
+.sign-up-form input {
+  margin: auto !important;
 }
