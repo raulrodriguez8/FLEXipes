@@ -28,14 +28,14 @@
     <h5>Cooking Instructions</h5>
     <p>{{ data.instructions }}</p>
     {% endautoescape %}
-    <a class="btn" href="{{ data.spoonacularSourceUrl}}" target="_blank">Go to full recipe</a>
+    <a class="btn" style="background-color: #4F5C7D;" href="{{ data.spoonacularSourceUrl}}" target="_blank">Go to full recipe</a>
 
     <h4>Planning your meals? Add this to your calendar!</h4>
     <div>
         <form action="{% url 'add_meal' data.id %}" method="post" class="col s4">
             {% csrf_token %}
             {{ meal_form.as_p }}
-            <input type="submit" class="btn" value="Add Meal">
+            <input style="background-color: #4F5C7D" ="submit" class="btn" value="Add Meal">
         </form>
         </div>
       </div>
