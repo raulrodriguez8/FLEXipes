@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block styles %}
-    <link rel="stylesheet" href="../../static/css/results.css">
+<link rel="stylesheet" href="/../../static/css/calendar.css">
+<link rel="stylesheet" href="/../../../static/css/style.css">
 {% endblock %}
 
 {% block content %}
@@ -15,6 +16,9 @@
 	<a class="btn btn-info right" href="{'% url 'meal_calendar' %}?{'{ next_month }}"> Next Month </a>
 	
 </div>
-
 {{ calendar }}
+{% endblock %}
+
+{% block footer %}
+
 {% endblock %}
