@@ -30,3 +30,9 @@
 .datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {
     color: #4F5C7D;
 }
+
+.meal-form{
+    border: 3px solid black;
+    margin: 10vh;
+    padding: 5vh 10vh;
+}
