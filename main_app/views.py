@@ -57,8 +57,7 @@ def signup(request):
 
 #Recipe Views
 @login_required
-def recipe_results(request):
-
+def recipe_results(request, page):
     pantry_ingredients = User.objects.get(id=request.user.id).profile.pantry.all()
     all_pantry_ingredients = pantry_ingredients.all()
     
@@ -66,13 +65,17 @@ def recipe_results(request):
     for i in all_pantry_ingredients:
         pantry_ingredients_string = pantry_ingredients_string + i.name + ','
     
+    offset = 10 * page
 
-    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+pantry_ingredients_string+'&number=10&ranking=1&ignorePantry=true&apiKey='+API_KEY+''
+    url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+pantry_ingredients_string+'&number=10&offset='+str(offset)+'&ranking=1&ignorePantry=true&apiKey='+API_KEY+''
     
     res = requests.get(url)
     data = json.loads(res.text)
 
-    context = {'data': data}
+    context = {
+        'data': data,
+        'page': page
+    }
     return render(request, 'recipes/results.html', context)
 
 
