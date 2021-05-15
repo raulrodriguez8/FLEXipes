@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block styles %}
+    <link rel="stylesheet" href="/../static/css/meals.css">
+{% endblock %}
 
 {% block content %}
   <form action="" method="post">
@@ -6,6 +9,19 @@
     <table>
       {{ form.as_table }}
     </table>
-    <input type="submit" value="Submit!" class="btn">
+    <input style="background-color: #4F5C7D" type="submit" value="Submit!" class="btn">
   </form>
+  <script>
+    var selectEl = document.getElementById('id_meal');
+    M.FormSelect.init(selectEl);
+
+
+    var dateEl = document.getElementById('id_date');
+    M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+    });
+  </script>
 {% endblock %}
