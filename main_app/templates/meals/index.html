@@ -6,6 +6,11 @@
 {% endblock %}
 
 <h1>FLEXipes Meals List</h1>
+
+<a class="waves-effect waves-light btn" style="background-color: #4F5C7D; position: absolute; right: 0;" href="{% url 'meal_calendar' %}">Back To Calendar</a>
+<br>
+<br>
+<br>
 {% for meal in meals %}
   <a href="{{ meal.recipe_url }}" target="_blank">
   <div class="card teal-text text-accent-4">
