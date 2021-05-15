@@ -5,16 +5,17 @@
 {% endblock %}
 
 {% block content %}
-
+<div>
+<div class="results-header container" style="text-align: center;">
 <h1>FLEXipes Results</h1>
-
+</div>
 
 
 <div class="results">
 <div class="row" style="display: flex; flex-wrap: wrap;">
   {% for recipe in data %}
   <div class="col s6">
-    <div class="card">
+    <div class="card" style="height: 100vh">
       <div class="card-image">
         <img src="{{ recipe.image }}">
         
@@ -51,5 +52,6 @@
   <a href="{% url 'recipe_results' page|add:'1' %}"><li class="btn-floating btn-large waves-effect waves-light teal darken-1"><i class="material-icons large">chevron_right</i></li></a>
   {% endif %}
 </ul>
+</div>
 
 {% endblock %}

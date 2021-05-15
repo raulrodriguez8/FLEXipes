@@ -5,15 +5,17 @@
 {% endblock %}
 
 {% block content %}
-
-<h1>Log In</h1>
+<div class="sign-up-page">
+    <div class="sign-up-form">
+<h1>Log in to FLEXipes</h1>
 
 <!-- Add the login form -->
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" class="btn" value="login">
+    <input style="background-color: #4F5C7D; display:flex; align-self: center; justify-content: center; text-align: center;" type="submit" class="btn" value="login">
     <input type="hidden" name="next" value="{{ next }}">
 </form>
-
+    </div>
+</div>    
 {% endblock %}
