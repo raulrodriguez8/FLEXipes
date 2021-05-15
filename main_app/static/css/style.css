@@ -2,12 +2,13 @@ body {
   display: flex !important;
   min-height: 100vh !important;
   flex-direction: column !important;
+  font-family: "Sriracha", cursive;
 }
 
 main {
   flex: 1 0 auto !important;
   height: calc(100vh - 38px);
-  background-color: #FEF5EC;
+  background-color: #fef5ec;
 }
 
 footer {
@@ -40,7 +41,7 @@ input.btn {
   margin-right: 5vh;
   color: black;
   padding: 10px;
-  border:  #4F5C7D 2px solid;
+  border: #4f5c7d 2px solid;
   margin-top: 25px;
 }
 
@@ -54,9 +55,9 @@ input.btn {
 }
 
 .datepicker-date-display {
-  background-color: #4F5C7D !important;
+  background-color: #4f5c7d !important;
 }
 
 .datepicker-table td.is-selected {
-  background-color: #4F5C7D !important;
+  background-color: #4f5c7d !important;
 }
