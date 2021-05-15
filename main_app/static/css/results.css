@@ -1,18 +1,22 @@
 .results {
-    display: grid !important;
-    align-content: center;
-    justify-content: center;
-    grid-template-columns: 50 50;
-    margin: 10vh;
-    padding: 10px;
+  display: grid !important;
+  align-content: center;
+  justify-content: center;
+  grid-template-columns: 50 50;
+  margin: 10vh;
+  padding: 10px;
 }
 
 .results-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 main {
-    background-color: #FEF5EC !important;
+  background-color: #fef5ec !important;
+}
+
+body {
+  font-family: "Sriracha", cursive;
 }
