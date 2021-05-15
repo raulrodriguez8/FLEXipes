@@ -167,7 +167,6 @@ def add_meal(request, recipe_id):
 def all_meals(request):
     meals = Meal.objects.all()
     context = {'meals': meals}
-    print(meals)
     return render(request, 'meals/index.html', context)
 
 class Meal_Delete(LoginRequiredMixin, DeleteView):

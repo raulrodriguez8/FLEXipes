@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block styles %}
+    <link rel="stylesheet" href="/../static/css/meals.css">
+{% endblock %}
 
 {% block content %}
   <form action="" method="post">
@@ -6,7 +9,7 @@
     <table>
       {{ form.as_table }}
     </table>
-    <input type="submit" value="Submit!" class="btn">
+    <input style="background-color: #4F5C7D" type="submit" value="Submit!" class="btn">
   </form>
   <script>
     var selectEl = document.getElementById('id_meal');
