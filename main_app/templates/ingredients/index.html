@@ -10,16 +10,16 @@
     <form action="{% url 'ingredient_create' %}" style="display: flex; align-content: stretch;" method="post" class="col s12">
         {% csrf_token %}
         {{ ingredient_form }}
-        <input type="submit" class="btn" value="Add Ingredient">
+        <input type="submit" class="btn" value="Add Ingredient" style="background-color: #4F5C7D; color:white;">
     </form>
 </div>
 <div class="row" style="display: flex; align-content: stretch;">
     <h3>Done updating your pantry?</h3>
-    <a href="{% url 'recipe_results' 0 %}" class="waves-effect waves-light btn-large" style="margin: auto 10px;">Get Recipes!</a>
+    <a href="{% url 'recipe_results' 0 %}" style="background-color: #4F5C7D; color:white; margin: auto 10px;" class="waves-effect waves-light btn-large">Get Recipes!</a>
 </div>
 <div class="row">
 <ul class='collection col s6'>
-    <li class='collection-item teal lighten-3'>
+    <li class='collection-item' style="background-color: #336036; color: white;">
     
     <div name='collection_contents'>
         <h5 class='title'>All Ingredients</h5>
@@ -31,7 +31,7 @@
         <div class="collection_content">
         <form action="{% url 'assoc_ingredient' ingredient.id %}" method="post">
             {% csrf_token %}
-            <button type="submit" class="btn-flat secondary-content left" style="padding: 0; margin: 0 20px;"><i class="material-icons medium circle teal lighten-4" style="padding: 0 10px;">add</i></button>
+            <button type="submit" class="btn-flat secondary-content left" style="padding: 0; margin: 0 20px;"><i class="material-icons medium circle" style="padding: 0 10px; background-color: #4F5C7D; color: white">add</i></button>
         </form>
         <h5 class='title' style="display: inline;">{{ ingredient.name }}  <span class="new badge {{ ingredient.aisle }}" data-badge-caption="">{{ ingredient.aisle }}</span> </h5>
         </div>
@@ -39,7 +39,7 @@
     {% endfor %}
 </ul>
 <ul class='collection col s6'>
-    <li class='collection-item teal lighten-3'>
+    <li class='collection-item' style="background-color: #336036; color: white;">
     
         <div name='collection_contents'>
             <h5 class='title'>My Pantry</h5>
@@ -49,10 +49,10 @@
     {% for ingredient in user.profile.pantry.all %}
     <li class='collection-item hoverable'>
         <div class="collection_content">
-        <a href="{% url 'ingredient_update' ingredient.id %}" class="btn-flat secondary-content left" style="padding: 0; margin: 0 20px;"><i class="material-icons medium circle teal lighten-4" style="padding: 0 10px;">edit</i></a>
+        <a href="{% url 'ingredient_update' ingredient.id %}" class="btn-flat secondary-content left" style="padding: 0; margin: 0 20px;"><i class="material-icons medium circle" style="padding: 0 10px; background-color: #4F5C7D; color: white">edit</i></a>
         <form action="{% url 'remove_ingredient' ingredient.id %}" method="post">
             {% csrf_token %}
-        <button type="submit" class="btn-flat secondary-content left" style="padding: 0; margin: 0 20px;"><i class="material-icons medium circle teal lighten-4" style="padding: 0 10px;">remove</i></button>
+        <button type="submit" class="btn-flat secondary-content left" style="padding: 0; margin: 0 20px;"><i class="material-icons medium circle" style="padding: 0 10px; background-color: #4F5C7D; color: white">remove</i></button>
         </form>
 
         <h5 class='title' style="display: inline;">{{ ingredient.name }} <span class="new badge {{ ingredient.aisle }}" data-badge-caption="">{{ ingredient.aisle }}</span></h5>
