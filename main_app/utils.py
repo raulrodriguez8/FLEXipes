@@ -17,13 +17,13 @@ class Calendar(HTMLCalendar):
 		for meal in meals_per_day:
 
 			if meal.meal == 'B':
-				d += f'<div><li style ="background-color: pink; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
+				d += f'<div><li style ="background-color: #ED6B86;color: white; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
 			elif meal.meal == 'R':
-				d += f'<div><li style ="background-color: yellow; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
+				d += f'<div><li style ="background-color: #FF495C;color: white; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
 			elif meal.meal == 'L':
-				d += f'<div><li style ="background-color: orange; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
+				d += f'<div><li style ="background-color: #4F5C7D;color: white;  width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
 			else:
-				d += f'<div><li style ="background-color: blue; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
+				d += f'<div><li style ="background-color: #336036;color: white; width:200px;margin: 0;"> {meal.meal}: <a href="{ meal.recipe_url }" target="_blank"> {meal.recipe_name} </li></div><br>'
 
 		if day != 0:
 			return f'<td style="vertical-align: top;text-align: left;"><span class="date">{day}</span><ul> {d} </ul></td>'

@@ -161,7 +161,7 @@ def add_meal(request, recipe_id):
         'user_id': user_id,
     }
 
-    return render(request, 'meals/calendar.html', context)
+    return redirect('meal_calendar')
 
 @login_required
 def all_meals(request):
@@ -176,6 +176,7 @@ class Meal_Delete(LoginRequiredMixin, DeleteView):
 class Meal_Update(LoginRequiredMixin, UpdateView):
     model = Meal
     fields = ['date', 'meal']
+    success_url = '/meals/'
 
 #Calendar Views
 class CalendarView(LoginRequiredMixin,generic.ListView):
