@@ -38,7 +38,7 @@
         <form action="{% url 'add_meal' data.id %}" method="post" class="col s4">
             {% csrf_token %}
             {{ meal_form.as_p }}
-            <input style="background-color: #4F5C7D" ="submit" class="btn" value="Add Meal">
+            <input style="background-color: #4F5C7D" type="submit" class="btn" value="Add Meal">
         </form>
         </div>
       </div>
